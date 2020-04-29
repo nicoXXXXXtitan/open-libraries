@@ -25,7 +25,7 @@ class App extends React.Component {
     const { loggedUser } = this.props;
 
     const tokenLocalStorage = window.localStorage.getItem('token');
-    axios.defaults.headers.Authorization = `Bearer ${tokenLocalStorage}`;
+    // axios.defaults.headers.Authorization = `Bearer ${tokenLocalStorage}`;
     if (tokenLocalStorage) {
       loggedUser();
     }
