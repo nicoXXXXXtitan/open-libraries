@@ -86,6 +86,7 @@ const ModalAddUser = ({
                     value={inputFirstnameValue}
                     onChange={handleChangeInput}
                     autoComplete="on"
+                    required
                   />
                 </Form.Group>
                 <Form.Group>
@@ -98,6 +99,7 @@ const ModalAddUser = ({
                     value={inputLastnameValue}
                     onChange={handleChangeInput}
                     autoComplete="on"
+                    required
                   />
                 </Form.Group>
                 <Form.Group>
@@ -110,6 +112,7 @@ const ModalAddUser = ({
                     value={inputEmailValue}
                     onChange={handleChangeInput}
                     autoComplete="on"
+                    required
                   />
                 </Form.Group>
                 <Form.Group>
@@ -122,6 +125,7 @@ const ModalAddUser = ({
                     value={inputPasswordValue}
                     onChange={handleChangeInput}
                     autoComplete="on"
+                    required
                   />
                 </Form.Group>
                 <Form.Group>
@@ -134,6 +138,7 @@ const ModalAddUser = ({
                     value={inputPhoneValue}
                     onChange={handleChangeInput}
                     autoComplete="on"
+                    required
                   />
                 </Form.Group>
                 <Form.Group>
