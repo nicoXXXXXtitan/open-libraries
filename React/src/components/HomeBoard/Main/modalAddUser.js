@@ -9,183 +9,195 @@ import {
   Form,
 } from 'react-bootstrap';
 
-const ModalAddUser = ({
-  showModalAddUser,
-  closeModal,
-  onSubmit,
-  onValueChange,
-  onKeyPress,
-  inputFirstnameValue,
-  inputLastnameValue,
-  inputPasswordValue,
-  inputAddressValue,
-  inputPhoneValue,
-  inputEmailValue,
-  changeAddressFromAPI,
-  addressesAPI,
-  showInputApi,
-  clearInput,
-}) => {
-  const handleChangeInput = (evt) => {
+class ModalAddUser extends React.Component {
+
+  handleChangeInput = (evt) => {
     const { name, value } = evt.target;
+    const { onValueChange } = this.props;
+
     onValueChange(name, value);
   };
 
-  const handleKeyDown = () => {
-    onKeyPress();
+  handleBlur = () => {
+    console.log("handleBlur");
   };
 
-  const handleSubmit = (evt) => {
+  handleSubmit = (evt) => {
     evt.preventDefault();
+    const { onSubmit } = this.props;
     onSubmit();
   };
 
-  const clickAddressAPI = (evt) => {
+  handleKeyDown = () => {
+    const { onKeyPress } = this.props;
+    onKeyPress();
+  };
+
+
+  clickAddressAPI = (evt) => {
+    const { changeAddressFromAPI } = this.props;
     changeAddressFromAPI(evt.target.value);
   };
 
-  const inputClear = () => {
+  inputClear = () => {
+    const { clearInput } = this.props;
     clearInput();
   };
 
-  const handleClose = () => {
+  handleClose = () => {
+    const { closeModal } = this.props;
     closeModal();
   };
 
-  return (
-    <Modal className="modal-add-book" show={showModalAddUser} onHide={handleClose}>
-      <Modal.Header>
-        <Container>
-          <Row className="justify-content-md-center">
-            <Col md={6}>
-              <div className="panel panel-login">
-                <div className="panel-heading">
-                  <Row>
-                    <Col>
-                      <a id="login-form-link">Ajouter un utilisateur</a>
-                    </Col>
-                  </Row>
+  render() {
+
+    const {
+      showModalAddUser,
+      inputFirstnameValue,
+      inputLastnameValue,
+      inputPasswordValue,
+      inputAddressValue,
+      inputPhoneValue,
+      inputEmailValue,
+      addressesAPI,
+      showInputApi,
+    } = this.props;
+
+    return (
+      <Modal className="modal-add-book" show={showModalAddUser} onHide={this.handleClose}>
+        <Modal.Header>
+          <Container>
+            <Row className="justify-content-md-center">
+              <Col md={6}>
+                <div className="panel panel-login">
+                  <div className="panel-heading">
+                    <Row>
+                      <Col>
+                        <a id="login-form-link">Ajouter un utilisateur</a>
+                      </Col>
+                    </Row>
+                  </div>
                 </div>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </Modal.Header>
-      <Modal.Body>
-        <Container>
-          <Row>
-            <Col>
-              <Form id="login-form" style={{ display: 'block' }} onSubmit={handleSubmit}>
-                <Form.Group>
-                  <Form.Label>Prénom</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="firstname"
-                    className="book-title"
-                    placeholder="Prénom de l'utilisateur"
-                    value={inputFirstnameValue}
-                    onChange={handleChangeInput}
-                    autoComplete="on"
-                    required
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Nom</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="lastname"
-                    className="author-firstname"
-                    placeholder="Nom de l'utilisateur"
-                    value={inputLastnameValue}
-                    onChange={handleChangeInput}
-                    autoComplete="on"
-                    required
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    name="email"
-                    className="publication-date"
-                    placeholder="Adresse email de l'utilisateur"
-                    value={inputEmailValue}
-                    onChange={handleChangeInput}
-                    autoComplete="on"
-                    required
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Mot de passe</Form.Label>
-                  <Form.Control
-                    type="password"
-                    name="password"
-                    className="publication-date"
-                    placeholder="Mot de passe de l'utilisateur"
-                    value={inputPasswordValue}
-                    onChange={handleChangeInput}
-                    autoComplete="on"
-                    required
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Téléphone</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="phone"
-                    className="type"
-                    placeholder="N° de téléphone de l'utilisateur"
-                    value={inputPhoneValue}
-                    onChange={handleChangeInput}
-                    autoComplete="on"
-                    required
-                  />
-                </Form.Group>
-                <Form.Group>
+              </Col>
+            </Row>
+          </Container>
+        </Modal.Header>
+        <Modal.Body>
+          <Container>
+            <Row>
+              <Col>
+                <Form id="login-form" style={{ display: 'block' }} onSubmit={this.handleSubmit}>
+                  <Form.Group>
+                    <Form.Label>Prénom</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="firstname"
+                      className="book-title"
+                      placeholder="Prénom de l'utilisateur"
+                      value={inputFirstnameValue}
+                      onChange={this.handleChangeInput}
+                      onBlur={this.handleBlur}
+                      // autoComplete="on"
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Nom</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="lastname"
+                      className="author-firstname"
+                      placeholder="Nom de l'utilisateur"
+                      value={inputLastnameValue}
+                      onChange={this.handleChangeInput}
+                      // autoComplete="on"
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      className="publication-date"
+                      placeholder="Adresse email de l'utilisateur"
+                      value={inputEmailValue}
+                      onChange={this.handleChangeInput}
+                      // autoComplete="on"
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Mot de passe</Form.Label>
+                    <Form.Control
+                      type="password"
+                      name="password"
+                      className="publication-date"
+                      placeholder="Mot de passe, minimum 8 caractères"
+                      value={inputPasswordValue}
+                      onChange={this.handleChangeInput}
+                      // autoComplete="on"
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Téléphone</Form.Label>
+                    <Form.Control
+                      type="number"
+                      name="phone"
+                      className="type"
+                      placeholder="N° de téléphone de l'utilisateur"
+                      value={inputPhoneValue}
+                      onChange={this.handleChangeInput}
+                      // autoComplete="on"
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group>
 
-                  <Form.Label>Adresse</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="address"
-                    className="author-lastname"
-                    placeholder="Commencer à taper votre adresse"
-                    autoComplete="off"
-                    value={inputAddressValue}
-                    onChange={handleChangeInput}
-                    onKeyUp={handleKeyDown}
-                    onClick={inputClear}
-                  />
+                    <Form.Label>Adresse</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="address"
+                      className="author-lastname"
+                      placeholder="Commencer à taper votre adresse"
+                      autoComplete="off"
+                      value={inputAddressValue}
+                      onChange={this.handleChangeInput}
+                      onKeyUp={this.handleKeyDown}
+                      onClick={this.inputClear}
+                    />
 
-                  {addressesAPI
-                    && addressesAPI.map((address) => (
-                      <Form.Control
-                        type="text"
-                        name="address"
-                        className="address-api"
-                        readOnly 
-                        value={address.properties.label}
-                        key={address.properties.x}
-                        onClick={clickAddressAPI}
-                        style={{ display: showInputApi }}
-                      />
-                    ))}
-                </Form.Group>
-                <Form.Group>
-                  <Row className="justify-content-md-center">
-                    <Col className="text-center" sm={6}>
-                      <Button type="submit" name="login-submit" id="login-submit" className="form-control btn btn-login">Ajouter l'utilisateur</Button>
-                    </Col>
-                  </Row>
-                </Form.Group>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-      </Modal.Body>
-    </Modal>
-  );
-};
-
+                    {addressesAPI
+                      && addressesAPI.map((address) => (
+                        <Form.Control
+                          type="text"
+                          name="address"
+                          className="address-api"
+                          readOnly 
+                          value={address.properties.label}
+                          key={address.properties.x}
+                          onClick={this.clickAddressAPI}
+                          style={{ display: showInputApi }}
+                        />
+                      ))}
+                  </Form.Group>
+                  <Form.Group>
+                    <Row className="justify-content-md-center">
+                      <Col className="text-center" sm={6}>
+                        <Button type="submit" name="login-submit" id="login-submit" className="form-control btn btn-login">Ajouter l'utilisateur</Button>
+                      </Col>
+                    </Row>
+                  </Form.Group>
+                </Form>
+              </Col>
+            </Row>
+          </Container>
+        </Modal.Body>
+      </Modal>
+    );
+  }
+}
 ModalAddUser.propTypes = {
   showModalAddUser: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,

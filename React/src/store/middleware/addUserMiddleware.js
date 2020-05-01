@@ -1,7 +1,12 @@
 /* eslint-disable no-case-declarations */
 import axios from 'axios';
 
-import { ON_KEY_PRESS, SUBMIT_FORM_ADD_USER, setAddressAPI, displayMessageSuccess } from 'src/store/actions';
+import {
+  ON_KEY_PRESS,
+  SUBMIT_FORM_ADD_USER,
+  setAddressAPI,
+  displayMessageSuccess,
+} from 'src/store/actions';
 
 const addUserMiddleware = (store) => (next) => (action) => {
   const { address } = store.getState().formAddUser;
@@ -51,7 +56,7 @@ const addUserMiddleware = (store) => (next) => (action) => {
             longitude: addressesAPI[0].geometry.coordinates[1],
             city: addressesAPI[0].properties.city,
             postalcode: poscodeToNumber,
-            street: addressesAPI[0].properties.name
+            street: addressesAPI[0].properties.name,
           },
           headers: {
             Authorization: `Bearer ${token2}`,
