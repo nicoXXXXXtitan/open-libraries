@@ -9,7 +9,15 @@ import {
 } from 'src/store/actions';
 
 const addUserMiddleware = (store) => (next) => (action) => {
-  const { address } = store.getState().formAddUser;
+  const {
+    address, firstname, lastname, email, phone, password,
+  } = store.getState().formAddUser;
+
+  const firstnameCleaned = firstname.trim();
+  const lastnameCleaned = lastname.trim();
+  const emailCleaned = email.trim();
+  const phoneCleaned = phone.trim();
+  const passwordCleaned = password.trim();
 
   switch (action.type) {
     case ON_KEY_PRESS:
@@ -47,11 +55,11 @@ const addUserMiddleware = (store) => (next) => (action) => {
           method: 'post',
           url: 'http://localhost:8001/api/board/user/add',
           data: {
-            firstname: store.getState().formAddUser.firstname,
-            lastname: store.getState().formAddUser.lastname,
-            email: store.getState().formAddUser.email,
-            phoneNumber: store.getState().formAddUser.phone,
-            password: store.getState().formAddUser.password,
+            firstname: firstnameCleaned,
+            lastname: lastnameCleaned,
+            email: emailCleaned,
+            phoneNumber: phoneCleaned,
+            password: passwordCleaned,
             latitude: addressesAPI[0].geometry.coordinates[0],
             longitude: addressesAPI[0].geometry.coordinates[1],
             city: addressesAPI[0].properties.city,
