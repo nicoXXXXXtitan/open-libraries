@@ -10,17 +10,18 @@ import {
   changeAddressFromToAPI,
   clearInputAddress,
   closeModalAddUser,
+  clearTheInputs,
  } from 'src/store/actions';
 
 // eslint-disable-next-line arrow-body-style
 const mapStateToProps = (state) => {
   return {
-    inputFirstnameValue: state.formAddUser.firstname,
-    inputLastnameValue: state.formAddUser.lastname,
-    inputPasswordValue: state.formAddUser.password,
-    inputAddressValue: state.formAddUser.address,
-    inputPhoneValue: state.formAddUser.phone,
-    inputEmailValue: state.formAddUser.email,
+    firstnameValue: state.formAddUser.firstname,
+    lastnameValue: state.formAddUser.lastname,
+    passwordValue: state.formAddUser.password,
+    addressValue: state.formAddUser.address,
+    phoneValue: state.formAddUser.phone,
+    emailValue: state.formAddUser.email,
     addressesAPI: state.formAddUser.addressesAPI,
     showInputApi: state.formAddUser.showInputApi,
     cities: state.formAddUser.cities,
@@ -44,8 +45,11 @@ const mapDispatchToProps = (dispatch) => ({
   changeAddressFromAPI: (newValueAddress) => {
     dispatch(changeAddressFromToAPI(newValueAddress));
   },
-  clearInput: () => {
+  clearAdressInput: () => {
     dispatch(clearInputAddress());
+  },
+  clearInputs: () => {
+    dispatch(clearTheInputs());
   },
   closeModal: () => {
     dispatch(closeModalAddUser());

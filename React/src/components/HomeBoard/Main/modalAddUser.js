@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './modallAddUser.scss';
 import {
   Modal,
   Button,
@@ -9,17 +10,46 @@ import {
   Form,
 } from 'react-bootstrap';
 
+const validateData = (name, value, errors) => {
+  switch (name) {
+    case 'firstname':
+      if (!value) {
+        errors.firstname = 'champ obligatoire';
+      }
+      else if (value.length < 3) {
+        errors.firstname = 'Votre prénom doit comporter au moins 4 lettres !';
+      }
+      else {
+        errors.firstname = '';
+      }
+      break;
+    default:
+      break;
+  }
+};
+
 class ModalAddUser extends React.Component {
+
+  // Grace au plugin babel : @babel/plugin-proposal-class-properties
+  // on peut définir des propriétés directement dans la classe
+  // ICI le this est disponible
+  state = {
+    errors: {
+      firstname: '',
+    },
+  };
 
   handleChangeInput = (evt) => {
     const { name, value } = evt.target;
     const { onValueChange } = this.props;
+    const { errors } = this.state;
 
     onValueChange(name, value);
+    validateData(name, value, errors);
   };
 
   handleBlur = () => {
-    console.log("handleBlur");
+
   };
 
   handleSubmit = (evt) => {
@@ -40,28 +70,31 @@ class ModalAddUser extends React.Component {
   };
 
   inputClear = () => {
-    const { clearInput } = this.props;
-    clearInput();
+    const { clearAdressInput } = this.props;
+    clearAdressInput();
   };
 
   handleClose = () => {
-    const { closeModal } = this.props;
+    const { closeModal, clearInputs } = this.props;
     closeModal();
+    clearInputs();
   };
 
   render() {
 
     const {
       showModalAddUser,
-      inputFirstnameValue,
-      inputLastnameValue,
-      inputPasswordValue,
-      inputAddressValue,
-      inputPhoneValue,
-      inputEmailValue,
+      firstnameValue,
+      lastnameValue,
+      passwordValue,
+      addressValue,
+      phoneValue,
+      emailValue,
       addressesAPI,
       showInputApi,
     } = this.props;
+
+    const { errors } = this.state;
 
     return (
       <Modal className="modal-add-book" show={showModalAddUser} onHide={this.handleClose}>
@@ -94,13 +127,14 @@ class ModalAddUser extends React.Component {
                       name="firstname"
                       className="book-title"
                       placeholder="Prénom de l'utilisateur"
-                      value={inputFirstnameValue}
+                      value={firstnameValue}
                       onChange={this.handleChangeInput}
                       onBlur={this.handleBlur}
                       // autoComplete="on"
-                      required
+                      // required
                     />
                   </Form.Group>
+                  {errors.firstname.length > 0 && <span className="login-error">{errors.firstname}</span>}
                   <Form.Group>
                     <Form.Label>Nom</Form.Label>
                     <Form.Control
@@ -108,7 +142,7 @@ class ModalAddUser extends React.Component {
                       name="lastname"
                       className="author-firstname"
                       placeholder="Nom de l'utilisateur"
-                      value={inputLastnameValue}
+                      value={lastnameValue}
                       onChange={this.handleChangeInput}
                       // autoComplete="on"
                       required
@@ -121,7 +155,7 @@ class ModalAddUser extends React.Component {
                       name="email"
                       className="publication-date"
                       placeholder="Adresse email de l'utilisateur"
-                      value={inputEmailValue}
+                      value={emailValue}
                       onChange={this.handleChangeInput}
                       // autoComplete="on"
                       required
@@ -134,7 +168,7 @@ class ModalAddUser extends React.Component {
                       name="password"
                       className="publication-date"
                       placeholder="Mot de passe, minimum 8 caractères"
-                      value={inputPasswordValue}
+                      value={passwordValue}
                       onChange={this.handleChangeInput}
                       // autoComplete="on"
                       required
@@ -147,7 +181,7 @@ class ModalAddUser extends React.Component {
                       name="phone"
                       className="type"
                       placeholder="N° de téléphone de l'utilisateur"
-                      value={inputPhoneValue}
+                      value={phoneValue}
                       onChange={this.handleChangeInput}
                       // autoComplete="on"
                       required
@@ -162,7 +196,7 @@ class ModalAddUser extends React.Component {
                       className="author-lastname"
                       placeholder="Commencer à taper votre adresse"
                       autoComplete="off"
-                      value={inputAddressValue}
+                      value={addressValue}
                       onChange={this.handleChangeInput}
                       onKeyUp={this.handleKeyDown}
                       onClick={this.inputClear}
@@ -203,17 +237,18 @@ ModalAddUser.propTypes = {
   closeModal: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onValueChange: PropTypes.func.isRequired,
-  inputFirstnameValue: PropTypes.string.isRequired,
-  inputLastnameValue: PropTypes.string.isRequired,
-  inputPasswordValue: PropTypes.string.isRequired,
-  inputAddressValue: PropTypes.string.isRequired,
-  inputPhoneValue: PropTypes.string.isRequired,
-  inputEmailValue: PropTypes.string.isRequired,
+  firstnameValue: PropTypes.string.isRequired,
+  lastnameValue: PropTypes.string.isRequired,
+  passwordValue: PropTypes.string.isRequired,
+  addressValue: PropTypes.string.isRequired,
+  phoneValue: PropTypes.string.isRequired,
+  emailValue: PropTypes.string.isRequired,
   onKeyPress: PropTypes.func.isRequired,
-  clearInput: PropTypes.func.isRequired,
+  clearAdressInput: PropTypes.func.isRequired,
   showInputApi: PropTypes.string.isRequired,
   addressesAPI: PropTypes.array.isRequired,
   changeAddressFromAPI: PropTypes.func.isRequired,
+  clearInputs: PropTypes.func.isRequired,
 };
 
 export default ModalAddUser;

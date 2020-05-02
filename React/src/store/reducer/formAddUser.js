@@ -3,6 +3,7 @@ import {
   SET_ADDRESS_API,
   CHANGE_ADDRESS_FROM_API,
   CLEAR_INPUT_ADDRESS,
+  CLEAR_INPUT_FORM_LOGIN,
   DISPLAY_MESSAGE_SUCCESS_ADD_USER,
   SHOW_MODAL_ADD_NEW_USER,
   CLOSE_MODAL_ADD_NEW_USER,
@@ -61,6 +62,16 @@ const reducer = (state = initialState, action = {}) => {
         address: '',
         addressesAPI: [],
         showInputApi: 'block',
+      };
+    case CLEAR_INPUT_FORM_LOGIN:
+      return {
+        ...state,
+        firstname: '',
+        lastname: '',
+        password: '',
+        email: '',
+        address: '',
+        phone: '',
       };
     case DISPLAY_MESSAGE_SUCCESS_ADD_USER:
       return {

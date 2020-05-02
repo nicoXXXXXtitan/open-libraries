@@ -63,7 +63,7 @@ export const CLOSE_MODAL_ERROR_SEARCH_BOOK = 'CLOSE_MODAL_ERROR_SEARCH_BOOK';
 export const OPEN_RESULTS_OWNER_BOOK = 'OPEN_RESULTS_OWNER_BOOK';
 export const OPEN_RESULT_OWNER_AFTER_CLICK_ON_BOOK = 'OPEN_RESULT_OWNER_AFTER_CLICK_ON_BOOK';
 export const EMPTY_INPUT_LOGIN = 'EMPTY_INPUT_LOGIN';
-
+export const CLEAR_INPUT_FORM_LOGIN = 'CLEAR_INPUT_FORM_LOGIN';
 // --- action creators
 
 //  -------------------   form login ---------------
@@ -292,6 +292,10 @@ export const changeAddressFromToAPI = (newAddressApi) => ({
 
 export const clearInputAddress = () => ({
   type: CLEAR_INPUT_ADDRESS,
+});
+
+export const clearTheInputs = () => ({
+  type: CLEAR_INPUT_FORM_LOGIN,
 });
 
 export const setUsers = (usersBoard) => ({
