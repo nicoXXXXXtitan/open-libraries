@@ -14,8 +14,10 @@ import {
 const initialState = {
   firstname: '',
   lastname: '',
-  password: '',
   email: '',
+  confirmEmail: '',
+  password: '',
+  confirmPasswordValue: '',
   address: '',
   phone: '',
   addressesAPI: [],

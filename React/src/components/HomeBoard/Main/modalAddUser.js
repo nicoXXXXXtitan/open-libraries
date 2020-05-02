@@ -10,12 +10,45 @@ import {
   Form,
 } from 'react-bootstrap';
 
-// La validation des données du form se fait à l'aide d'un objet errors={}. 
-// Si chaque propriétés de cet objet est vide il y a aucun message d'erreurs qui s'affiche dans le formulaire.
+const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+
+// numéro de 10 chiffres sans virgule, sans espace, sans ponctuation et pas de signe + devant le nombre
+const phoneRegex = /^\d{10}$/;
+
+// La validation des données du form se fait à l'aide d'un objet errors={}.
+// Si chaque propriétés de cet objet est vide, il y a aucun message d'erreur qui s'affiche dans le formulaire.
 const validateData = (name, value, errors) => {
   switch (name) {
     case 'firstname':
       errors.firstname = !value ? 'champ obligatoire' : '';
+      break;
+    case 'lastname':
+      errors.lastname = !value ? 'champ obligatoire' : '';
+      break;
+    case 'email':
+      errors.email = validEmailRegex.test(value) ? '' : 'Votre email est invalide ! ';
+      break;
+    case 'password':
+      errors.password = value.length < 8 ? 'Minimum 8 caractères !' : '';
+      break;
+    case 'phone':
+      errors.phone = phoneRegex.test(value) ? '' : 'Le numéro de téléphone soit comporter 10 chiffres';
+      break;
+    case 'address':
+      errors.address = !value ? 'champ obligatoire' : '';
+      console.log(errors.address);
+      break;
+    default:
+      break;
+  }
+};
+
+const confirmEmail = (name, value, errors, email) => {
+  switch (name) {
+    case 'confirmEmail':
+      errors.confirmEmail = (value === email) ? '' : 'Vos emails sont différents !';
+      console.log(errors.confirmEmail);
+      console.log("email : ", email , "confirm email : ", value);
       break;
     default:
       break;
@@ -24,6 +57,13 @@ const validateData = (name, value, errors) => {
 
 const clearMessagesErrors = (errors) => {
   errors.firstname = '';
+  errors.lastname = '';
+  errors.email = '';
+  errors.confirmEmail = '';
+  errors.password = '';
+  errors.confirmPassword = '';
+  errors.phone = '';
+  errors.address = '';
 };
 
 class ModalAddUser extends React.Component {
@@ -34,6 +74,13 @@ class ModalAddUser extends React.Component {
   state = {
     errors: {
       firstname: '',
+      lastname: '',
+      email: '',
+      confirmEmail: '',
+      password: '',
+      confirmPassword: '',
+      phone: '',
+      address: '',
     },
   };
 
@@ -46,9 +93,12 @@ class ModalAddUser extends React.Component {
     validateData(name, value, errors);
   };
 
-  handleBlur = () => {
-
-  };
+  // HandleBlur = (evt) => {
+  //   const { name, value } = evt.target;
+  //   const { errors } = this.state;
+  //   const { emailValue } = this.props;
+  // confirmEmail(name, value, errors, emailValue);
+  // }
 
   handleSubmit = (evt) => {
     evt.preventDefault();
@@ -86,10 +136,12 @@ class ModalAddUser extends React.Component {
       showModalAddUser,
       firstnameValue,
       lastnameValue,
+      emailValue,
+      confirmEmailValue,
       passwordValue,
+      confirmPasswordValue,
       addressValue,
       phoneValue,
-      emailValue,
       addressesAPI,
       showInputApi,
     } = this.props;
@@ -129,7 +181,6 @@ class ModalAddUser extends React.Component {
                       placeholder="Prénom de l'utilisateur"
                       value={firstnameValue}
                       onChange={this.handleChangeInput}
-                      onBlur={this.handleBlur}
                       // autoComplete="on"
                       required
                     />
@@ -148,10 +199,11 @@ class ModalAddUser extends React.Component {
                       required
                     />
                   </Form.Group>
+                  {errors.lastname.length > 0 && <span className="login-error">{errors.lastname}</span>}
                   <Form.Group>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
-                      type="email"
+                      // type="email"
                       name="email"
                       className="publication-date"
                       placeholder="Adresse email de l'utilisateur"
@@ -161,6 +213,22 @@ class ModalAddUser extends React.Component {
                       required
                     />
                   </Form.Group>
+                  {errors.email.length > 0 && <span className="login-error">{errors.email}</span>}
+                  <Form.Group>
+                    <Form.Label>Confirmer votre email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="confirmEmail"
+                      className="publication-date"
+                      placeholder="Confirmer votre email"
+                      value={confirmEmailValue}
+                      onChange={this.handleChangeInput}
+                      // onBlur={this.HandleBlur}
+                      // autoComplete="on"
+                      required
+                    />
+                  </Form.Group>
+                  {errors.confirmEmail.length > 0 && <span className="login-error">{errors.confirmEmail}</span>}
                   <Form.Group>
                     <Form.Label>Mot de passe</Form.Label>
                     <Form.Control
@@ -171,24 +239,39 @@ class ModalAddUser extends React.Component {
                       value={passwordValue}
                       onChange={this.handleChangeInput}
                       // autoComplete="on"
-                      required
+                      // required
                     />
                   </Form.Group>
+                  {errors.password.length > 0 && <span className="login-error">{errors.password}</span>}
+                  <Form.Group>
+                    <Form.Label>Confirmer votre mot de passe</Form.Label>
+                    <Form.Control
+                      type="password"
+                      name="confirmPassword"
+                      className="publication-date"
+                      placeholder="Mot de passe, minimum 8 caractères"
+                      value={confirmPasswordValue}
+                      onChange={this.handleChangeInput}
+                      // autoComplete="on"
+                      // required
+                    />
+                  </Form.Group>
+                  {errors.confirmPassword.length > 0 && <span className="login-error">{errors.confirmPassword}</span>}
                   <Form.Group>
                     <Form.Label>Téléphone</Form.Label>
                     <Form.Control
-                      type="number"
+                      // type="number"
                       name="phone"
                       className="type"
                       placeholder="N° de téléphone de l'utilisateur"
                       value={phoneValue}
                       onChange={this.handleChangeInput}
                       // autoComplete="on"
-                      required
+                      // required
                     />
                   </Form.Group>
+                  {errors.phone.length > 0 && <span className="login-error">{errors.phone}</span>}
                   <Form.Group>
-
                     <Form.Label>Adresse</Form.Label>
                     <Form.Control
                       type="text"
@@ -216,6 +299,7 @@ class ModalAddUser extends React.Component {
                         />
                       ))}
                   </Form.Group>
+                  {errors.address.length > 0 && <span className="login-error">{errors.address}</span>}
                   <Form.Group>
                     <Row className="justify-content-md-center">
                       <Col className="text-center" sm={6}>
@@ -240,9 +324,11 @@ ModalAddUser.propTypes = {
   firstnameValue: PropTypes.string.isRequired,
   lastnameValue: PropTypes.string.isRequired,
   passwordValue: PropTypes.string.isRequired,
+  confirmPasswordValue: PropTypes.string.isRequired,
   addressValue: PropTypes.string.isRequired,
   phoneValue: PropTypes.string.isRequired,
   emailValue: PropTypes.string.isRequired,
+  confirmEmailValue: PropTypes.string.isRequired,
   onKeyPress: PropTypes.func.isRequired,
   clearAdressInput: PropTypes.func.isRequired,
   showInputApi: PropTypes.string.isRequired,

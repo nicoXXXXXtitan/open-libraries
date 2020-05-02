@@ -18,10 +18,12 @@ const mapStateToProps = (state) => {
   return {
     firstnameValue: state.formAddUser.firstname,
     lastnameValue: state.formAddUser.lastname,
+    emailValue: state.formAddUser.email,
+    confirmEmailValue: state.formAddUser.confirmEmail,
     passwordValue: state.formAddUser.password,
+    confirmPasswordValue: state.formAddUser.confirmPasswordValue,
     addressValue: state.formAddUser.address,
     phoneValue: state.formAddUser.phone,
-    emailValue: state.formAddUser.email,
     addressesAPI: state.formAddUser.addressesAPI,
     showInputApi: state.formAddUser.showInputApi,
     cities: state.formAddUser.cities,
