@@ -10,22 +10,20 @@ import {
   Form,
 } from 'react-bootstrap';
 
+// La validation des données du form se fait à l'aide d'un objet errors={}. 
+// Si chaque propriétés de cet objet est vide il y a aucun message d'erreurs qui s'affiche dans le formulaire.
 const validateData = (name, value, errors) => {
   switch (name) {
     case 'firstname':
-      if (!value) {
-        errors.firstname = 'champ obligatoire';
-      }
-      else if (value.length < 3) {
-        errors.firstname = 'Votre prénom doit comporter au moins 4 lettres !';
-      }
-      else {
-        errors.firstname = '';
-      }
+      errors.firstname = !value ? 'champ obligatoire' : '';
       break;
     default:
       break;
   }
+};
+
+const clearMessagesErrors = (errors) => {
+  errors.firstname = '';
 };
 
 class ModalAddUser extends React.Component {
@@ -76,8 +74,10 @@ class ModalAddUser extends React.Component {
 
   handleClose = () => {
     const { closeModal, clearInputs } = this.props;
+    const { errors } = this.state;
     closeModal();
     clearInputs();
+    clearMessagesErrors(errors);
   };
 
   render() {
@@ -131,7 +131,7 @@ class ModalAddUser extends React.Component {
                       onChange={this.handleChangeInput}
                       onBlur={this.handleBlur}
                       // autoComplete="on"
-                      // required
+                      required
                     />
                   </Form.Group>
                   {errors.firstname.length > 0 && <span className="login-error">{errors.firstname}</span>}
