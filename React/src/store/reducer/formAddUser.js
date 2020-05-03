@@ -9,6 +9,7 @@ import {
   CLOSE_MODAL_ADD_NEW_USER,
   CLOSE_MODAL_SUCCESS_ADD_USER,
   CLEAR_INPUT_CONFIRM_EMAIL,
+  CLEAR_INPUT_CONFIRM_PASSWORD,
 } from 'src/store/actions';
 
 // --- initial state
@@ -53,6 +54,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         confirmEmail: '',
       };
+    case CLEAR_INPUT_CONFIRM_PASSWORD:
+      return {
+        ...state,
+        confirmPassword: '',
+      };
     case SET_ADDRESS_API:
       return {
         ...state,
@@ -76,10 +82,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         firstname: '',
         lastname: '',
-        password: '',
         email: '',
-        address: '',
+        confirmEmail: '',
+        password: '',
+        confirmPassword: '',
         phone: '',
+        address: '',
       };
     case DISPLAY_MESSAGE_SUCCESS_ADD_USER:
       return {

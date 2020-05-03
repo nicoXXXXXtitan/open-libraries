@@ -17,32 +17,6 @@ import Password from './Fields/password';
 import Phone from './Fields/phone';
 import Address from './Fields/address';
 
-
-
-
-const confirmEmail = (emailValue, confirmEmailValue, errors) => {
-
-  let validEmail = false;
-  if (emailValue === confirmEmailValue) {
-    validEmail = true;
-  } else {
-    errors.confirmEmail = 'vos emails sont différents';
-  }
-  console.log("validEmail :", validEmail, 'confirmEmail : ', errors.confirmEmail )
-  return validEmail;
-};
-
-const clearMessagesErrors = (errors) => {
-  errors.firstname = '';
-  errors.lastname = '';
-  errors.email = '';
-  errors.confirmEmail = '';
-  errors.password = '';
-  errors.confirmPassword = '';
-  errors.phone = '';
-  errors.address = '';
-};
-
 class ModalAddUser extends React.Component {
 
   // Grace au plugin babel : @babel/plugin-proposal-class-properties
@@ -71,7 +45,7 @@ class ModalAddUser extends React.Component {
     const phoneRegex = /^\d{10}$/;
 
     const { errors } = this.state;
-    const { emailValue } = this.props;
+    const { emailValue, passwordValue } = this.props;
     switch (name) {
       case 'firstname':
         this.setState({
@@ -118,7 +92,7 @@ class ModalAddUser extends React.Component {
           this.setState({
             errors: {
               ...errors,
-              confirmEmail: 'Votre mot de passe doit être identique',
+              confirmEmail: 'Votre email doit être identique',
             },
           });
         } else {
@@ -139,12 +113,28 @@ class ModalAddUser extends React.Component {
         });
         break;
       case 'confirmPassword':
-        this.setState({
-          errors: {
-            ...errors,
-            confirmPassword: (!value) ? 'champ obigatoire' : '',
-          },
-        });
+        if (!value) {
+          this.setState({
+            errors: {
+              ...errors,
+              confirmPassword: (!value) ? 'champ obigatoire' : '',
+            },
+          });
+        } else if (value !== passwordValue) {
+          this.setState({
+            errors: {
+              ...errors,
+              confirmPassword: 'Votre mot de passe doit être identique',
+            },
+          });
+        } else {
+          this.setState({
+            errors: {
+              ...errors,
+              confirmPassword: '',
+            },
+          });
+        }
         break;
       case 'phone':
         this.setState({
@@ -165,16 +155,17 @@ class ModalAddUser extends React.Component {
       default:
         break;
     }
-
   };
 
   handleChangeInput = (evt) => {
     const { name, value } = evt.target;
-    const { onValueChange, clearConfirmEmail } = this.props;
+    const { onValueChange, clearConfirmEmail, clearConfirmPassword } = this.props;
     onValueChange(name, value);
     this.validateData(name, value);
     if (name === 'email') {
       clearConfirmEmail();
+    } else if (name === 'password') {
+      clearConfirmPassword();
     }
   };
 
@@ -206,7 +197,23 @@ class ModalAddUser extends React.Component {
     const { errors } = this.state;
     closeModal();
     clearInputs();
-    clearMessagesErrors(errors);
+    this.clearMessagesErrors(errors);
+  };
+
+  clearMessagesErrors = (errors) => {
+    this.setState({
+      errors: {
+        ...errors,
+        firstname: '',
+        lastname: '',
+        email: '',
+        confirmEmail: '',
+        password: '',
+        confirmPassword: '',
+        phone: '',
+        address: '',
+      },
+    });
   };
 
   render() {
@@ -314,6 +321,7 @@ ModalAddUser.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onValueChange: PropTypes.func.isRequired,
   clearConfirmEmail: PropTypes.func.isRequired,
+  clearConfirmPassword: PropTypes.func.isRequired,
   firstnameValue: PropTypes.string.isRequired,
   lastnameValue: PropTypes.string.isRequired,
   passwordValue: PropTypes.string.isRequired,
