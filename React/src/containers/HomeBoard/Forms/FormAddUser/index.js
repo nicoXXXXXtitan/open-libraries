@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import formAddUser from 'src/components/HomeBoard/Main/modalAddUser';
+import formAddUser from 'src/components/HomeBoard/Forms/FormAddUser/modalAddUser';
 
 import {
   changeInputAddUser,
