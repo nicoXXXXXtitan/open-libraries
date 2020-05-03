@@ -11,6 +11,7 @@ import {
   clearInputAddress,
   closeModalAddUser,
   clearTheInputs,
+  clearConfirmEmailInput,
  } from 'src/store/actions';
 
 // eslint-disable-next-line arrow-body-style
@@ -35,6 +36,9 @@ const mapDispatchToProps = (dispatch) => ({
   onValueChange: (name, value) => {
     const action = changeInputAddUser(name, value);
     dispatch(action);
+  },
+  clearConfirmEmail: () => {
+    dispatch(clearConfirmEmailInput());
   },
   onSubmit: () => {
     const action = submitFormAddUser();

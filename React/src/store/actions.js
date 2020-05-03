@@ -64,6 +64,7 @@ export const OPEN_RESULTS_OWNER_BOOK = 'OPEN_RESULTS_OWNER_BOOK';
 export const OPEN_RESULT_OWNER_AFTER_CLICK_ON_BOOK = 'OPEN_RESULT_OWNER_AFTER_CLICK_ON_BOOK';
 export const EMPTY_INPUT_LOGIN = 'EMPTY_INPUT_LOGIN';
 export const CLEAR_INPUT_FORM_LOGIN = 'CLEAR_INPUT_FORM_LOGIN';
+export const CLEAR_INPUT_CONFIRM_EMAIL = 'CLEAR_INPUT_CONFIRM_EMAIL';
 // --- action creators
 
 //  -------------------   form login ---------------
@@ -270,6 +271,10 @@ export const changeInputAddUser = (name, value) => ({
   type: CHANGE_INPUT_VALUE_FORM_ADD_USER,
   name,
   value,
+});
+
+export const clearConfirmEmailInput = () => ({
+  type: CLEAR_INPUT_CONFIRM_EMAIL,
 });
 
 export const submitFormAddUser = () => ({

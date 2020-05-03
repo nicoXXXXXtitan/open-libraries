@@ -8,6 +8,7 @@ import {
   SHOW_MODAL_ADD_NEW_USER,
   CLOSE_MODAL_ADD_NEW_USER,
   CLOSE_MODAL_SUCCESS_ADD_USER,
+  CLEAR_INPUT_CONFIRM_EMAIL,
 } from 'src/store/actions';
 
 // --- initial state
@@ -46,6 +47,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         // en fonction du nom du champ je mets à jour le bon state
         [action.name]: action.value,
+      };
+    case CLEAR_INPUT_CONFIRM_EMAIL:
+      return {
+        ...state,
+        confirmEmail: '',
       };
     case SET_ADDRESS_API:
       return {

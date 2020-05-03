@@ -71,6 +71,7 @@ class ModalAddUser extends React.Component {
     const phoneRegex = /^\d{10}$/;
 
     const { errors } = this.state;
+    const { emailValue } = this.props;
     switch (name) {
       case 'firstname':
         this.setState({
@@ -106,12 +107,28 @@ class ModalAddUser extends React.Component {
         }
         break;
       case 'confirmEmail':
-        this.setState({
-          errors: {
-            ...errors,
-            confirmEmail: (!value) ? 'champ obigatoire' : '',
-          },
-        });
+        if (!value) {
+          this.setState({
+            errors: {
+              ...errors,
+              confirmEmail: (!value) ? 'champ obigatoire' : '',
+            },
+          });
+        } else if (value !== emailValue) {
+          this.setState({
+            errors: {
+              ...errors,
+              confirmEmail: 'Votre mot de passe doit être identique',
+            },
+          });
+        } else {
+          this.setState({
+            errors: {
+              ...errors,
+              confirmEmail: '',
+            },
+          });
+        }
         break;
       case 'password':
         this.setState({
@@ -153,9 +170,12 @@ class ModalAddUser extends React.Component {
 
   handleChangeInput = (evt) => {
     const { name, value } = evt.target;
-    const { onValueChange } = this.props;
+    const { onValueChange, clearConfirmEmail } = this.props;
     onValueChange(name, value);
     this.validateData(name, value);
+    if (name === 'email') {
+      clearConfirmEmail();
+    }
   };
 
   handleSubmit = (evt) => {
@@ -293,6 +313,7 @@ ModalAddUser.propTypes = {
   closeModal: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onValueChange: PropTypes.func.isRequired,
+  clearConfirmEmail: PropTypes.func.isRequired,
   firstnameValue: PropTypes.string.isRequired,
   lastnameValue: PropTypes.string.isRequired,
   passwordValue: PropTypes.string.isRequired,
