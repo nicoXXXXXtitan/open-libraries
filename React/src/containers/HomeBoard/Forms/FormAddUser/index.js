@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
     emailValue: state.formAddUser.email,
     confirmEmailValue: state.formAddUser.confirmEmail,
     passwordValue: state.formAddUser.password,
-    confirmPasswordValue: state.formAddUser.confirmPasswordValue,
+    confirmPasswordValue: state.formAddUser.confirmPassword,
     addressValue: state.formAddUser.address,
     phoneValue: state.formAddUser.phone,
     addressesAPI: state.formAddUser.addressesAPI,

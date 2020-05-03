@@ -3,7 +3,13 @@ import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 
-const Email = ({ emailValue, confirmEmailValue, handleChangeInput }) => {
+const Email = ({
+  emailValue,
+  confirmEmailValue,
+  handleChangeInput,
+  errorEmail,
+  errorConfirmEmail,
+}) => {
   return (
     <>
       <Form.Group>
@@ -19,7 +25,7 @@ const Email = ({ emailValue, confirmEmailValue, handleChangeInput }) => {
           required
         />
       </Form.Group>
-      {/* // {errors.email.length > 0 && <span className="login-error">{errors.email}</span>} */}
+      {errorEmail.length > 0 && <span className="login-error">{errorEmail}</span>}
       <Form.Group>
         <Form.Label>Confirmer votre email</Form.Label>
         <Form.Control
@@ -34,7 +40,7 @@ const Email = ({ emailValue, confirmEmailValue, handleChangeInput }) => {
           required
         />
       </Form.Group>
-    {/* // {errors.confirmEmail.length > 0 && <span className="login-error">{errors.confirmEmail}</span>} */}
+      {errorConfirmEmail.length > 0 && <span className="login-error">{errorConfirmEmail}</span>}
     </>
   );
 };
@@ -43,5 +49,7 @@ Email.propTypes = {
   emailValue: PropTypes.string.isRequired,
   confirmEmailValue: PropTypes.string.isRequired,
   handleChangeInput: PropTypes.func.isRequired,
+  errorEmail: PropTypes.string.isRequired,
+  errorConfirmEmail: PropTypes.string.isRequired,
 };
 export default Email;

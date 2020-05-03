@@ -2,7 +2,13 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-const Password = ({ passwordValue, confirmPasswordValue, handleChangeInput }) => {
+const Password = ({
+  passwordValue,
+  confirmPasswordValue,
+  handleChangeInput,
+  errorPassword,
+  errorConfirmPassword,
+}) => {
   return (
     <>
       <Form.Group>
@@ -18,7 +24,7 @@ const Password = ({ passwordValue, confirmPasswordValue, handleChangeInput }) =>
           required
         />
       </Form.Group>
-      {/* {errors.password.length > 0 && <span className="login-error">{errors.password}</span>} */}
+      {errorPassword.length > 0 && <span className="login-error">{errorPassword}</span>}
       <Form.Group>
         <Form.Label>Confirmer votre mot de passe</Form.Label>
         <Form.Control
@@ -32,7 +38,7 @@ const Password = ({ passwordValue, confirmPasswordValue, handleChangeInput }) =>
           required
         />
       </Form.Group>
-      {/* {errors.confirmPassword.length > 0 && <span className="login-error">{errors.confirmPassword}</span>} */}
+      {errorConfirmPassword.length > 0 && <span className="login-error">{errorConfirmPassword}</span>}
     </>
   );
 };
@@ -40,5 +46,7 @@ Password.propTypes = {
   passwordValue: PropTypes.string.isRequired,
   confirmPasswordValue: PropTypes.string.isRequired,
   handleChangeInput: PropTypes.func.isRequired,
+  errorPassword: PropTypes.string.isRequired,
+  errorConfirmPassword: PropTypes.string.isRequired,
 };
 export default Password;

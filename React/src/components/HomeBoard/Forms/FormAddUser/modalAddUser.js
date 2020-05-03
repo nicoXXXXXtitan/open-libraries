@@ -18,10 +18,7 @@ import Phone from './Fields/phone';
 import Address from './Fields/address';
 
 
-const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 
-// numéro de 10 chiffres sans virgule, sans espace, sans ponctuation et pas de signe + devant le nombre
-const phoneRegex = /^\d{10}$/;
 
 const confirmEmail = (emailValue, confirmEmailValue, errors) => {
 
@@ -67,50 +64,105 @@ class ModalAddUser extends React.Component {
   // La validation des données du form se fait à l'aide d'un objet errors={}.
   // Si chaque propriétés de cet objet est vide, il y a aucun message d'erreur qui s'affiche dans le formulaire.
   validateData = (name, value) => {
+
+    const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+
+    // numéro de 10 chiffres sans virgule, sans espace, sans ponctuation et pas de signe + devant le nombre
+    const phoneRegex = /^\d{10}$/;
+
+    const { errors } = this.state;
     switch (name) {
       case 'firstname':
+        this.setState({
+          errors: {
+            ...errors,
+            firstname: (!value) ? 'champ obigatoire' : '',
+          },
+        });
+        break;
+      case 'lastname':
+        this.setState({
+          errors: {
+            ...errors,
+            lastname: (!value) ? 'champ obigatoire' : '',
+          },
+        });
+        break;
+      case 'email':
         if (!value) {
-          console.log("pas de value");
           this.setState({
-            ...this.state.errors, firstname: 'champ obligatoire'
+            errors: {
+              ...errors,
+              email: (!value) ? 'champ obigatoire' : '',
+            },
+          });
+        } else {
+          this.setState({
+            errors: {
+              ...errors,
+              email: validEmailRegex.test(value) ? '' : 'Votre email est invalide ! ',
+            },
           });
         }
-        console.log(this.state.errors);
         break;
-      // case 'lastname':
-      //   errors.lastname = !value ? 'champ obligatoire' : '';
-      //   break;
-      // case 'email':
-      //   errors.email = validEmailRegex.test(value) ? '' : 'Votre email est invalide ! ';
-      //   break;
-      // case 'password':
-      //   errors.password = value.length < 8 ? 'Minimum 8 caractères !' : '';
-      //   break;
-      // case 'phone':
-      //   errors.phone = phoneRegex.test(value) ? '' : 'Le numéro de téléphone soit comporter 10 chiffres';
-      //   break;
-      // case 'address':
-      //   errors.address = !value ? 'champ obligatoire' : '';
-      //   break;
+      case 'confirmEmail':
+        this.setState({
+          errors: {
+            ...errors,
+            confirmEmail: (!value) ? 'champ obigatoire' : '',
+          },
+        });
+        break;
+      case 'password':
+        this.setState({
+          errors: {
+            ...errors,
+            password: (!value) ? 'champ obigatoire' : '',
+          },
+        });
+        break;
+      case 'confirmPassword':
+        this.setState({
+          errors: {
+            ...errors,
+            confirmPassword: (!value) ? 'champ obigatoire' : '',
+          },
+        });
+        break;
+      case 'phone':
+        this.setState({
+          errors: {
+            ...errors,
+            phone: phoneRegex.test(value) ? '' : 'Le numéro de téléphone soit comporter 10 chiffres',
+          },
+        });
+        break;
+      case 'address':
+        this.setState({
+          errors: {
+            ...errors,
+            address: !value ? 'champ obligatoire' : '',
+          },
+        });
+        break;
       default:
         break;
     }
+
   };
 
   handleChangeInput = (evt) => {
     const { name, value } = evt.target;
     const { onValueChange } = this.props;
-    // const { errors } = this.state;
     onValueChange(name, value);
     this.validateData(name, value);
   };
-
 
   handleSubmit = (evt) => {
     evt.preventDefault();
     const { onSubmit, emailValue, confirmEmailValue } = this.props;
     const { errors } = this.state;
-    confirmEmail(emailValue, confirmEmailValue, errors);
+    // confirmEmail(emailValue, confirmEmailValue, errors);
     // onSubmit();
   };
 
@@ -118,7 +170,6 @@ class ModalAddUser extends React.Component {
     const { onKeyPress } = this.props;
     onKeyPress();
   };
-
 
   clickAddressAPI = (evt) => {
     const { changeAddressFromAPI } = this.props;
@@ -185,24 +236,31 @@ class ModalAddUser extends React.Component {
                   <Firstname
                     firstnameValue={firstnameValue}
                     handleChangeInput={this.handleChangeInput}
+                    errorFirstname={errors.firstname}
                   />
                   <Lastname
                     lastnameValue={lastnameValue}
                     handleChangeInput={this.handleChangeInput}
+                    errorLastname={errors.lastname}
                   />
                   <Email
                     emailValue={emailValue}
                     confirmEmailValue={confirmEmailValue}
                     handleChangeInput={this.handleChangeInput}
+                    errorEmail={errors.email}
+                    errorConfirmEmail={errors.confirmEmail}
                   />
                   <Password
                     passwordValue={passwordValue}
                     confirmPasswordValue={confirmPasswordValue}
                     handleChangeInput={this.handleChangeInput}
+                    errorPassword={errors.password}
+                    errorConfirmPassword={errors.confirmPassword}
                   />
                   <Phone
                     phoneValue={phoneValue}
                     handleChangeInput={this.handleChangeInput}
+                    errorPhone={errors.phone}
                   />
                   <Address
                     addressValue={addressValue}
@@ -212,6 +270,7 @@ class ModalAddUser extends React.Component {
                     addressesAPI={addressesAPI}
                     clickAddressAPI={this.clickAddressAPI}
                     showInputApi={showInputApi}
+                    errorAddress={errors.address}
                   />
                   <Form.Group>
                     <Row className="justify-content-md-center">

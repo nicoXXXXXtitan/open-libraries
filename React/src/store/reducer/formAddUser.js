@@ -17,7 +17,7 @@ const initialState = {
   email: '',
   confirmEmail: '',
   password: '',
-  confirmPasswordValue: '',
+  confirmPassword: '',
   address: '',
   phone: '',
   addressesAPI: [],
