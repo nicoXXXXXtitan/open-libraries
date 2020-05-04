@@ -6,6 +6,7 @@ import {
   SUBMIT_FORM_ADD_USER,
   setAddressAPI,
   displayMessageSuccess,
+  displayMessageErrorFormEmpty,
 } from 'src/store/actions';
 
 const addUserMiddleware = (store) => (next) => (action) => {
@@ -44,43 +45,50 @@ const addUserMiddleware = (store) => (next) => (action) => {
 
       const { addressesAPI } = store.getState().formAddUser;
 
-      //  si il y a bien une recherche d'adresse qui a commencé à être tappé
-      if (addressesAPI.length > 1) {
+      if (firstnameCleaned.length > 0
+          && lastnameCleaned.length > 0
+          && emailCleaned.length > 0
+          && passwordCleaned.length > 0
+          && phoneCleaned.length > 0) {
 
-        const poscode = addressesAPI[0].properties.postcode;
-        const poscodeToNumber = parseInt(poscode, 10);
-        //  aucune vérif sont faites sur le formulaire
-        const token2 = window.localStorage.getItem('token');
-        axios({
-          method: 'post',
-          url: 'http://localhost:8001/api/board/user/add',
-          data: {
-            firstname: firstnameCleaned,
-            lastname: lastnameCleaned,
-            email: emailCleaned,
-            phoneNumber: phoneCleaned,
-            password: passwordCleaned,
-            latitude: addressesAPI[0].geometry.coordinates[0],
-            longitude: addressesAPI[0].geometry.coordinates[1],
-            city: addressesAPI[0].properties.city,
-            postalcode: poscodeToNumber,
-            street: addressesAPI[0].properties.name,
-          },
-          headers: {
-            Authorization: `Bearer ${token2}`,
-          },
-        })
-          .then((response) => {
-            if (response.status === 200) {
-              store.dispatch(displayMessageSuccess());
-            }
-  
+        //  si il y a bien une recherche d'adresse qui a commencé à être tappé
+        if (addressesAPI.length > 1) {
+          const poscode = addressesAPI[0].properties.postcode;
+          const poscodeToNumber = parseInt(poscode, 10);
+
+          const token2 = window.localStorage.getItem('token');
+          axios({
+            method: 'post',
+            url: 'http://localhost:8001/api/board/user/add',
+            data: {
+              firstname: firstnameCleaned,
+              lastname: lastnameCleaned,
+              email: emailCleaned,
+              password: passwordCleaned,
+              phoneNumber: phoneCleaned,
+              latitude: addressesAPI[0].geometry.coordinates[0],
+              longitude: addressesAPI[0].geometry.coordinates[1],
+              city: addressesAPI[0].properties.city,
+              postalcode: poscodeToNumber,
+              street: addressesAPI[0].properties.name,
+            },
+            headers: {
+              Authorization: `Bearer ${token2}`,
+            },
           })
-          .catch((error) => {
-            // console.log(error);
-          });
-      }
+            .then((response) => {
+              if (response.status === 200) {
+                store.dispatch(displayMessageSuccess());
+              }
 
+            })
+            .catch((error) => {
+              // console.log(error);
+            });
+        }
+      } else {
+        store.dispatch(displayMessageErrorFormEmpty());
+      }
       break;
     default:
       // par defaut je laise passer l'action

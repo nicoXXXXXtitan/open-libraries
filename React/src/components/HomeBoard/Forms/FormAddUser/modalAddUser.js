@@ -105,12 +105,28 @@ class ModalAddUser extends React.Component {
         }
         break;
       case 'password':
-        this.setState({
-          errors: {
-            ...errors,
-            password: (!value) ? 'champ obigatoire' : '',
-          },
-        });
+        if (!value) {
+          this.setState({
+            errors: {
+              ...errors,
+              password: (!value) ? 'champ obigatoire' : '',
+            },
+          });
+        } else if (value.length < 8) {
+          this.setState({
+            errors: {
+              ...errors,
+              password: 'Votre mot de passe doit comporter au moins 8 caractères !',
+            },
+          });
+        } else {
+          this.setState({
+            errors: {
+              ...errors,
+              password: '',
+            },
+          });
+        }
         break;
       case 'confirmPassword':
         if (!value) {
@@ -157,6 +173,15 @@ class ModalAddUser extends React.Component {
     }
   };
 
+  validateForm = (errors) => {
+    let valid = true;
+    Object.values(errors).forEach(
+      (val) => val.length > 0 && (valid = false )
+    );
+    console.log(valid);
+    return valid;
+  };
+
   handleChangeInput = (evt) => {
     const { name, value } = evt.target;
     const { onValueChange, clearConfirmEmail, clearConfirmPassword } = this.props;
@@ -171,10 +196,10 @@ class ModalAddUser extends React.Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-    const { onSubmit, emailValue, confirmEmailValue } = this.props;
+    const { onSubmit } = this.props;
     const { errors } = this.state;
-    // confirmEmail(emailValue, confirmEmailValue, errors);
-    // onSubmit();
+    this.validateForm(errors);
+    onSubmit();
   };
 
   handleKeyDown = () => {
@@ -230,6 +255,7 @@ class ModalAddUser extends React.Component {
       phoneValue,
       addressesAPI,
       showInputApi,
+      messageErrorFormEmpty,
     } = this.props;
 
     const { errors } = this.state;
@@ -299,6 +325,11 @@ class ModalAddUser extends React.Component {
                     showInputApi={showInputApi}
                     errorAddress={errors.address}
                   />
+                  <Row className="justify-content-md-center">
+                    <Col className="text-center" sm={6}>
+                      <h2 className="login-error">{messageErrorFormEmpty}</h2>
+                    </Col>
+                  </Row>
                   <Form.Group>
                     <Row className="justify-content-md-center">
                       <Col className="text-center" sm={6}>
@@ -336,6 +367,7 @@ ModalAddUser.propTypes = {
   addressesAPI: PropTypes.array.isRequired,
   changeAddressFromAPI: PropTypes.func.isRequired,
   clearInputs: PropTypes.func.isRequired,
+  messageErrorFormEmpty: PropTypes.string.isRequired,
 };
 
 export default ModalAddUser;

@@ -30,6 +30,7 @@ const mapStateToProps = (state) => {
     showInputApi: state.formAddUser.showInputApi,
     cities: state.formAddUser.cities,
     showModalAddUser: state.formAddUser.showModalAddUser,
+    messageErrorFormEmpty: state.formAddUser.messageErrorFormEmpty,
   };
 };
 

@@ -66,6 +66,7 @@ export const EMPTY_INPUT_LOGIN = 'EMPTY_INPUT_LOGIN';
 export const CLEAR_INPUT_FORM_LOGIN = 'CLEAR_INPUT_FORM_LOGIN';
 export const CLEAR_INPUT_CONFIRM_EMAIL = 'CLEAR_INPUT_CONFIRM_EMAIL';
 export const CLEAR_INPUT_CONFIRM_PASSWORD = 'CLEAR_INPUT_CONFIRM_PASSWORD';
+export const DISPLAY_MESSAGE_ERROR_FORM_EMPTY = 'DISPLAY_MESSAGE_ERROR_FORM_EMPTY';
 
 // --- action creators
 
@@ -316,6 +317,10 @@ export const setUsers = (usersBoard) => ({
 
 export const displayMessageSuccess = () => ({
   type: DISPLAY_MESSAGE_SUCCESS_ADD_USER,
+});
+
+export const displayMessageErrorFormEmpty = () => ({
+  type: DISPLAY_MESSAGE_ERROR_FORM_EMPTY,
 });
 
 export const closeModalSuccessUser = () => ({
