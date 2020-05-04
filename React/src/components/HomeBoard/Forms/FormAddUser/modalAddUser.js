@@ -32,6 +32,7 @@ class ModalAddUser extends React.Component {
       confirmPassword: '',
       phone: '',
       address: '',
+      messFailureSubmit: '',
     },
   };
 
@@ -178,7 +179,6 @@ class ModalAddUser extends React.Component {
     Object.values(errors).forEach(
       (val) => val.length > 0 && (valid = false )
     );
-    console.log(valid);
     return valid;
   };
 
@@ -194,13 +194,26 @@ class ModalAddUser extends React.Component {
     }
   };
 
+  displayMessFailureSubmit = () => {
+    const { errors } = this.state;
+    this.setState({
+      errors: {
+        ...errors,
+        messFailureSubmit: 'Il y a des erreurs dans le formulaire, corrigez les svp',
+      },
+    });
+  }
+
   handleSubmit = (evt) => {
     evt.preventDefault();
     const { onSubmit } = this.props;
     const { errors } = this.state;
-    let formValid = this.validateForm(errors);
-    console.log(formValid);
-    onSubmit();
+    const formValid = this.validateForm(errors);
+    if (formValid) {
+      onSubmit();
+    } else {
+      this.displayMessFailureSubmit();
+    }
   };
 
   handleKeyDown = () => {
@@ -238,6 +251,7 @@ class ModalAddUser extends React.Component {
         confirmPassword: '',
         phone: '',
         address: '',
+        messFailureSubmit: '',
       },
     });
   };
@@ -339,6 +353,11 @@ class ModalAddUser extends React.Component {
                   <Row className="justify-content-md-center">
                     <Col className="text-center" sm={6}>
                       <h2 className="login-error">{messageErrorFormEmpty}</h2>
+                    </Col>
+                  </Row>
+                  <Row className="justify-content-md-center">
+                    <Col className="text-center" sm={6}>
+                      <h2 className="login-error mb-2">{errors.messFailureSubmit}</h2>
                     </Col>
                   </Row>
                   <Form.Group>

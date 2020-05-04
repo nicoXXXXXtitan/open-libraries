@@ -44,7 +44,10 @@ const addUserMiddleware = (store) => (next) => (action) => {
     case SUBMIT_FORM_ADD_USER:
 
       const { addressesAPI } = store.getState().formAddUser;
-
+      // Le submit est conditionner dabord en local dans mon composant ModalAddUser avec l'objet error.
+      // 1er : Si pas d'erreurs dans mon composant, j'arrive ici
+      // 2ème : Si tous mes champs sont remplis, je permets la suite
+      // 3ème : Si J'ai des valeurs dans mon tableau de recherche d'adresses ( sinon j'ai des undifined à la ligne 72 )
       if (firstnameCleaned.length > 0
           && lastnameCleaned.length > 0
           && emailCleaned.length > 0
