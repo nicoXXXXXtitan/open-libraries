@@ -13,6 +13,7 @@ import {
   clearTheInputs,
   clearConfirmEmailInput,
   clearConfirmPasswordInput,
+  clearMessErrorFormEmpty,
  } from 'src/store/actions';
 
 // eslint-disable-next-line arrow-body-style
@@ -64,6 +65,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   closeModal: () => {
     dispatch(closeModalAddUser());
+  },
+  clearMessageErrorFormEmpty: () => {
+    dispatch(clearMessErrorFormEmpty());
   },
 });
 

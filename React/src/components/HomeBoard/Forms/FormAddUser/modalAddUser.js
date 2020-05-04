@@ -198,7 +198,8 @@ class ModalAddUser extends React.Component {
     evt.preventDefault();
     const { onSubmit } = this.props;
     const { errors } = this.state;
-    this.validateForm(errors);
+    let formValid = this.validateForm(errors);
+    console.log(formValid);
     onSubmit();
   };
 
@@ -240,6 +241,11 @@ class ModalAddUser extends React.Component {
       },
     });
   };
+
+  handleClick = () => {
+    const { clearMessageErrorFormEmpty } = this.props;
+    clearMessageErrorFormEmpty();
+  }
 
   render() {
 
@@ -290,11 +296,13 @@ class ModalAddUser extends React.Component {
                     firstnameValue={firstnameValue}
                     handleChangeInput={this.handleChangeInput}
                     errorFirstname={errors.firstname}
+                    handleClick={this.handleClick}
                   />
                   <Lastname
                     lastnameValue={lastnameValue}
                     handleChangeInput={this.handleChangeInput}
                     errorLastname={errors.lastname}
+                    handleClick={this.handleClick}
                   />
                   <Email
                     emailValue={emailValue}
@@ -302,6 +310,7 @@ class ModalAddUser extends React.Component {
                     handleChangeInput={this.handleChangeInput}
                     errorEmail={errors.email}
                     errorConfirmEmail={errors.confirmEmail}
+                    handleClick={this.handleClick}
                   />
                   <Password
                     passwordValue={passwordValue}
@@ -309,11 +318,13 @@ class ModalAddUser extends React.Component {
                     handleChangeInput={this.handleChangeInput}
                     errorPassword={errors.password}
                     errorConfirmPassword={errors.confirmPassword}
+                    handleClick={this.handleClick}
                   />
                   <Phone
                     phoneValue={phoneValue}
                     handleChangeInput={this.handleChangeInput}
                     errorPhone={errors.phone}
+                    handleClick={this.handleClick}
                   />
                   <Address
                     addressValue={addressValue}
@@ -368,6 +379,7 @@ ModalAddUser.propTypes = {
   changeAddressFromAPI: PropTypes.func.isRequired,
   clearInputs: PropTypes.func.isRequired,
   messageErrorFormEmpty: PropTypes.string.isRequired,
+  clearMessageErrorFormEmpty: PropTypes.func.isRequired,
 };
 
 export default ModalAddUser;

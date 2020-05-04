@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-const Phone = ({ phoneValue, handleChangeInput, errorPhone }) => {
+const Phone = ({ phoneValue, handleChangeInput, errorPhone, handleClick }) => {
   return (
     <>
       <Form.Group>
@@ -14,6 +14,7 @@ const Phone = ({ phoneValue, handleChangeInput, errorPhone }) => {
           placeholder="N° de téléphone de l'utilisateur"
           value={phoneValue}
           onChange={handleChangeInput}
+          onClick={handleClick}
           // autoComplete="on"
           required
         />
@@ -27,5 +28,6 @@ Phone.propTypes = {
   phoneValue: PropTypes.string.isRequired,
   handleChangeInput: PropTypes.func.isRequired,
   errorPhone: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 export default Phone;

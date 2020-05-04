@@ -8,6 +8,7 @@ const Password = ({
   handleChangeInput,
   errorPassword,
   errorConfirmPassword,
+  handleClick,
 }) => {
   return (
     <>
@@ -20,6 +21,7 @@ const Password = ({
           placeholder="Mot de passe, minimum 8 caractères"
           value={passwordValue}
           onChange={handleChangeInput}
+          onClick={handleClick}
           // autoComplete="on"
           required
         />
@@ -34,6 +36,7 @@ const Password = ({
           placeholder="Retaper votre mot de passe"
           value={confirmPasswordValue}
           onChange={handleChangeInput}
+          onClick={handleClick}
           // autoComplete="on"
           required
         />
@@ -48,5 +51,6 @@ Password.propTypes = {
   handleChangeInput: PropTypes.func.isRequired,
   errorPassword: PropTypes.string.isRequired,
   errorConfirmPassword: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 export default Password;

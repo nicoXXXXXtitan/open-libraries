@@ -11,6 +11,7 @@ import {
   CLEAR_INPUT_CONFIRM_EMAIL,
   CLEAR_INPUT_CONFIRM_PASSWORD,
   DISPLAY_MESSAGE_ERROR_FORM_EMPTY,
+  CLEAR_MESS_ERROR_FORM_EMPTY,
 } from 'src/store/actions';
 
 // --- initial state
@@ -76,6 +77,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         address: '',
+        messageErrorFormEmpty: '',
         addressesAPI: [],
         showInputApi: 'block',
       };
@@ -96,6 +98,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         messageErrorFormEmpty: 'Echec, vous n\'avez rien rempli !',
+      };
+    case CLEAR_MESS_ERROR_FORM_EMPTY:
+      return {
+        ...state,
+        messageErrorFormEmpty: '',
       };
     case DISPLAY_MESSAGE_SUCCESS_ADD_USER:
       return {

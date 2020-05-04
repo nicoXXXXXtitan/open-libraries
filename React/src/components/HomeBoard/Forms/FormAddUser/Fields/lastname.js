@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-const Lastname = ({ lastnameValue, handleChangeInput, errorLastname }) => {
+const Lastname = ({ lastnameValue, handleChangeInput, errorLastname, handleClick }) => {
   return (
     <>
       <Form.Group>
@@ -14,6 +14,7 @@ const Lastname = ({ lastnameValue, handleChangeInput, errorLastname }) => {
           placeholder="Nom de l'utilisateur"
           value={lastnameValue}
           onChange={handleChangeInput}
+          onClick={handleClick}
           // autoComplete="on"
           required
         />
@@ -27,6 +28,7 @@ Lastname.propTypes = {
   lastnameValue: PropTypes.string.isRequired,
   handleChangeInput: PropTypes.func.isRequired,
   errorLastname: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default Lastname;

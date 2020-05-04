@@ -9,6 +9,7 @@ const Email = ({
   handleChangeInput,
   errorEmail,
   errorConfirmEmail,
+  handleClick,
 }) => {
   return (
     <>
@@ -21,6 +22,7 @@ const Email = ({
           placeholder="Adresse email de l'utilisateur"
           value={emailValue}
           onChange={handleChangeInput}
+          onClick={handleClick}
           // autoComplete="on"
           required
         />
@@ -35,6 +37,7 @@ const Email = ({
           placeholder="Confirmer votre email"
           value={confirmEmailValue}
           onChange={handleChangeInput}
+          onClick={handleClick}
           // onBlur={this.HandleBlur}
           // autoComplete="on"
           required
@@ -51,5 +54,6 @@ Email.propTypes = {
   handleChangeInput: PropTypes.func.isRequired,
   errorEmail: PropTypes.string.isRequired,
   errorConfirmEmail: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 export default Email;
