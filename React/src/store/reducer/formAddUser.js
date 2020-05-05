@@ -3,21 +3,29 @@ import {
   SET_ADDRESS_API,
   CHANGE_ADDRESS_FROM_API,
   CLEAR_INPUT_ADDRESS,
+  CLEAR_INPUT_FORM_LOGIN,
   DISPLAY_MESSAGE_SUCCESS_ADD_USER,
   SHOW_MODAL_ADD_NEW_USER,
   CLOSE_MODAL_ADD_NEW_USER,
   CLOSE_MODAL_SUCCESS_ADD_USER,
+  CLEAR_INPUT_CONFIRM_EMAIL,
+  CLEAR_INPUT_CONFIRM_PASSWORD,
+  DISPLAY_MESSAGE_ERROR_FORM_EMPTY,
+  CLEAR_MESS_ERROR_FORM_EMPTY,
 } from 'src/store/actions';
 
 // --- initial state
 const initialState = {
   firstname: '',
   lastname: '',
-  password: '',
   email: '',
+  confirmEmail: '',
+  password: '',
+  confirmPassword: '',
   address: '',
   phone: '',
   addressesAPI: [],
+  messageErrorFormEmpty: '',
   showInputApi: 'block',
   showModalSuccessAddUser: false,
   showModalAddUser: false,
@@ -44,6 +52,16 @@ const reducer = (state = initialState, action = {}) => {
         // en fonction du nom du champ je mets à jour le bon state
         [action.name]: action.value,
       };
+    case CLEAR_INPUT_CONFIRM_EMAIL:
+      return {
+        ...state,
+        confirmEmail: '',
+      };
+    case CLEAR_INPUT_CONFIRM_PASSWORD:
+      return {
+        ...state,
+        confirmPassword: '',
+      };
     case SET_ADDRESS_API:
       return {
         ...state,
@@ -59,8 +77,32 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         address: '',
+        messageErrorFormEmpty: '',
         addressesAPI: [],
         showInputApi: 'block',
+      };
+    case CLEAR_INPUT_FORM_LOGIN:
+      return {
+        ...state,
+        firstname: '',
+        lastname: '',
+        email: '',
+        confirmEmail: '',
+        password: '',
+        confirmPassword: '',
+        phone: '',
+        address: '',
+        messageErrorFormEmpty: '',
+      };
+    case DISPLAY_MESSAGE_ERROR_FORM_EMPTY:
+      return {
+        ...state,
+        messageErrorFormEmpty: 'Désolé, vous n\' avez pas rempli tous les champs !',
+      };
+    case CLEAR_MESS_ERROR_FORM_EMPTY:
+      return {
+        ...state,
+        messageErrorFormEmpty: '',
       };
     case DISPLAY_MESSAGE_SUCCESS_ADD_USER:
       return {

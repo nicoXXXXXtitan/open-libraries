@@ -63,6 +63,11 @@ export const CLOSE_MODAL_ERROR_SEARCH_BOOK = 'CLOSE_MODAL_ERROR_SEARCH_BOOK';
 export const OPEN_RESULTS_OWNER_BOOK = 'OPEN_RESULTS_OWNER_BOOK';
 export const OPEN_RESULT_OWNER_AFTER_CLICK_ON_BOOK = 'OPEN_RESULT_OWNER_AFTER_CLICK_ON_BOOK';
 export const EMPTY_INPUT_LOGIN = 'EMPTY_INPUT_LOGIN';
+export const CLEAR_INPUT_FORM_LOGIN = 'CLEAR_INPUT_FORM_LOGIN';
+export const CLEAR_INPUT_CONFIRM_EMAIL = 'CLEAR_INPUT_CONFIRM_EMAIL';
+export const CLEAR_INPUT_CONFIRM_PASSWORD = 'CLEAR_INPUT_CONFIRM_PASSWORD';
+export const DISPLAY_MESSAGE_ERROR_FORM_EMPTY = 'DISPLAY_MESSAGE_ERROR_FORM_EMPTY';
+export const CLEAR_MESS_ERROR_FORM_EMPTY = 'CLEAR_MESS_ERROR_FORM_EMPTY';
 
 // --- action creators
 
@@ -272,6 +277,14 @@ export const changeInputAddUser = (name, value) => ({
   value,
 });
 
+export const clearConfirmEmailInput = () => ({
+  type: CLEAR_INPUT_CONFIRM_EMAIL,
+});
+
+export const clearConfirmPasswordInput = () => ({
+  type: CLEAR_INPUT_CONFIRM_PASSWORD,
+});
+
 export const submitFormAddUser = () => ({
   type: SUBMIT_FORM_ADD_USER,
 });
@@ -294,6 +307,10 @@ export const clearInputAddress = () => ({
   type: CLEAR_INPUT_ADDRESS,
 });
 
+export const clearTheInputs = () => ({
+  type: CLEAR_INPUT_FORM_LOGIN,
+});
+
 export const setUsers = (usersBoard) => ({
   type: SET_USERS,
   usersBoard,
@@ -301,6 +318,14 @@ export const setUsers = (usersBoard) => ({
 
 export const displayMessageSuccess = () => ({
   type: DISPLAY_MESSAGE_SUCCESS_ADD_USER,
+});
+
+export const displayMessageErrorFormEmpty = () => ({
+  type: DISPLAY_MESSAGE_ERROR_FORM_EMPTY,
+});
+
+export const clearMessErrorFormEmpty = () => ({
+  type: CLEAR_MESS_ERROR_FORM_EMPTY,
 });
 
 export const closeModalSuccessUser = () => ({

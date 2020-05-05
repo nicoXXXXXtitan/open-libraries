@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import formAddUser from 'src/components/HomeBoard/Main/modalAddUser';
+import formAddUser from 'src/components/HomeBoard/Forms/FormAddUser/modalAddUser';
 
 import {
   changeInputAddUser,
@@ -10,21 +10,28 @@ import {
   changeAddressFromToAPI,
   clearInputAddress,
   closeModalAddUser,
+  clearTheInputs,
+  clearConfirmEmailInput,
+  clearConfirmPasswordInput,
+  clearMessErrorFormEmpty,
  } from 'src/store/actions';
 
 // eslint-disable-next-line arrow-body-style
 const mapStateToProps = (state) => {
   return {
-    inputFirstnameValue: state.formAddUser.firstname,
-    inputLastnameValue: state.formAddUser.lastname,
-    inputPasswordValue: state.formAddUser.password,
-    inputAddressValue: state.formAddUser.address,
-    inputPhoneValue: state.formAddUser.phone,
-    inputEmailValue: state.formAddUser.email,
+    firstnameValue: state.formAddUser.firstname,
+    lastnameValue: state.formAddUser.lastname,
+    emailValue: state.formAddUser.email,
+    confirmEmailValue: state.formAddUser.confirmEmail,
+    passwordValue: state.formAddUser.password,
+    confirmPasswordValue: state.formAddUser.confirmPassword,
+    addressValue: state.formAddUser.address,
+    phoneValue: state.formAddUser.phone,
     addressesAPI: state.formAddUser.addressesAPI,
     showInputApi: state.formAddUser.showInputApi,
     cities: state.formAddUser.cities,
     showModalAddUser: state.formAddUser.showModalAddUser,
+    messageErrorFormEmpty: state.formAddUser.messageErrorFormEmpty,
   };
 };
 
@@ -32,6 +39,12 @@ const mapDispatchToProps = (dispatch) => ({
   onValueChange: (name, value) => {
     const action = changeInputAddUser(name, value);
     dispatch(action);
+  },
+  clearConfirmEmail: () => {
+    dispatch(clearConfirmEmailInput());
+  },
+  clearConfirmPassword: () => {
+    dispatch(clearConfirmPasswordInput());
   },
   onSubmit: () => {
     const action = submitFormAddUser();
@@ -44,11 +57,17 @@ const mapDispatchToProps = (dispatch) => ({
   changeAddressFromAPI: (newValueAddress) => {
     dispatch(changeAddressFromToAPI(newValueAddress));
   },
-  clearInput: () => {
+  clearAdressInput: () => {
     dispatch(clearInputAddress());
+  },
+  clearInputs: () => {
+    dispatch(clearTheInputs());
   },
   closeModal: () => {
     dispatch(closeModalAddUser());
+  },
+  clearMessageErrorFormEmpty: () => {
+    dispatch(clearMessErrorFormEmpty());
   },
 });
 

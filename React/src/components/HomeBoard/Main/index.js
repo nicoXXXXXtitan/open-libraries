@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import './main.scss';
-import ModalAddUser from 'src/containers/HomeBoard/Main/ModalAddUser';
+import ModalAddUser from 'src/containers/HomeBoard/Forms/FormAddUser';
 import ModalSuccessAddUser from 'src/containers/HomeBoard/Main/ModalSuccessAddUser';
 import FigureUser from 'src/containers/HomeBoard/Main/FigureUser';
 import FigureBook from 'src/components/HomeBoard/Main/FigureBook';
