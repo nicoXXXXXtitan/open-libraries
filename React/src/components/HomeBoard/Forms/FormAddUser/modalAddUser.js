@@ -37,9 +37,10 @@ class ModalAddUser extends React.Component {
   };
 
   // La validation des données du form se fait à l'aide d'un objet errors={}.
-  // Si chaque propriétés de cet objet est vide, il y a aucun message d'erreur qui s'affiche dans le formulaire.
+  // Si chaque propriétés de cet objet est vide:
+  //  - il y a aucun message d'erreur qui s'affiche dans le formulaire.
+  //  - Cela autorise  d'arriver dans la case SUBMIT_FORM_ADD_USER du addUserMiddleware
   validateData = (name, value) => {
-
     const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 
     // numéro de 10 chiffres sans virgule, sans espace, sans ponctuation et pas de signe + devant le nombre
@@ -47,6 +48,7 @@ class ModalAddUser extends React.Component {
 
     const { errors } = this.state;
     const { emailValue, passwordValue } = this.props;
+
     switch (name) {
       case 'firstname':
         this.setState({
@@ -69,7 +71,7 @@ class ModalAddUser extends React.Component {
           this.setState({
             errors: {
               ...errors,
-              email: (!value) ? 'champ obigatoire' : '',
+              email: 'champ obigatoire',
             },
           });
         } else {
@@ -86,21 +88,14 @@ class ModalAddUser extends React.Component {
           this.setState({
             errors: {
               ...errors,
-              confirmEmail: (!value) ? 'champ obigatoire' : '',
-            },
-          });
-        } else if (value !== emailValue) {
-          this.setState({
-            errors: {
-              ...errors,
-              confirmEmail: 'Votre email doit être identique',
+              confirmEmail: 'champ obigatoire',
             },
           });
         } else {
           this.setState({
             errors: {
               ...errors,
-              confirmEmail: '',
+              confirmEmail: (value !== emailValue) ? 'Votre email doit être identique' : '',
             },
           });
         }
@@ -110,7 +105,7 @@ class ModalAddUser extends React.Component {
           this.setState({
             errors: {
               ...errors,
-              password: (!value) ? 'champ obigatoire' : '',
+              password: 'champ obigatoire',
             },
           });
         } else if (value.length < 8) {
@@ -134,32 +129,34 @@ class ModalAddUser extends React.Component {
           this.setState({
             errors: {
               ...errors,
-              confirmPassword: (!value) ? 'champ obigatoire' : '',
-            },
-          });
-        } else if (value !== passwordValue) {
-          this.setState({
-            errors: {
-              ...errors,
-              confirmPassword: 'Votre mot de passe doit être identique',
+              confirmPassword: 'champ obigatoire',
             },
           });
         } else {
           this.setState({
             errors: {
               ...errors,
-              confirmPassword: '',
+              confirmPassword: (value !== passwordValue) ? 'Votre mot de passe doit être identique' : '',
             },
           });
         }
         break;
       case 'phone':
-        this.setState({
-          errors: {
-            ...errors,
-            phone: phoneRegex.test(value) ? '' : 'Le numéro de téléphone soit comporter 10 chiffres',
-          },
-        });
+        if (!value) {
+          this.setState({
+            errors: {
+              ...errors,
+              phone: 'champ obigatoire',
+            },
+          });
+        } else {
+          this.setState({
+            errors: {
+              ...errors,
+              phone: phoneRegex.test(value) ? '' : 'Le numéro de téléphone soit comporter 10 chiffres',
+            },
+          });
+        }
         break;
       case 'address':
         this.setState({
@@ -176,6 +173,7 @@ class ModalAddUser extends React.Component {
 
   validateForm = (errors) => {
     let valid = true;
+    // Si aucun message d'erreurs dans mon objet alors valid = true
     Object.values(errors).forEach(
       (val) => val.length > 0 && (valid = false )
     );
@@ -186,7 +184,6 @@ class ModalAddUser extends React.Component {
     const { name, value } = evt.target;
     const { onValueChange, clearConfirmEmail, clearConfirmPassword } = this.props;
     onValueChange(name, value);
-    this.validateData(name, value);
     if (name === 'email') {
       clearConfirmEmail();
     } else if (name === 'password') {
@@ -203,18 +200,6 @@ class ModalAddUser extends React.Component {
       },
     });
   }
-
-  handleSubmit = (evt) => {
-    evt.preventDefault();
-    const { onSubmit } = this.props;
-    const { errors } = this.state;
-    const formValid = this.validateForm(errors);
-    if (formValid) {
-      onSubmit();
-    } else {
-      this.displayMessFailureSubmit();
-    }
-  };
 
   handleKeyDown = () => {
     const { onKeyPress } = this.props;
@@ -256,10 +241,39 @@ class ModalAddUser extends React.Component {
     });
   };
 
+  clearMessErrorFormWrong = (errors) => {
+    this.setState({
+      errors: {
+        ...errors,
+        messFailureSubmit: '',
+      },
+    });
+  };
+
   handleClick = () => {
     const { clearMessageErrorFormEmpty } = this.props;
+    const { errors } = this.state;
     clearMessageErrorFormEmpty();
+    this.clearMessErrorFormWrong(errors);
   }
+
+  //  La validation se fait à chaque changement de champ
+  handleBlur = (evt) => {
+    const { name, value } = evt.target;
+    this.validateData(name, value);
+  };
+
+  handleSubmit = (evt) => {
+    evt.preventDefault();
+    const { onSubmit } = this.props;
+    const { errors } = this.state;
+    const formValid = this.validateForm(errors);
+    if (formValid) {
+      onSubmit();
+    } else {
+      this.displayMessFailureSubmit();
+    }
+  };
 
   render() {
 
@@ -311,12 +325,14 @@ class ModalAddUser extends React.Component {
                     handleChangeInput={this.handleChangeInput}
                     errorFirstname={errors.firstname}
                     handleClick={this.handleClick}
+                    handleBlur={this.handleBlur}
                   />
                   <Lastname
                     lastnameValue={lastnameValue}
                     handleChangeInput={this.handleChangeInput}
                     errorLastname={errors.lastname}
                     handleClick={this.handleClick}
+                    handleBlur={this.handleBlur}
                   />
                   <Email
                     emailValue={emailValue}
@@ -325,6 +341,7 @@ class ModalAddUser extends React.Component {
                     errorEmail={errors.email}
                     errorConfirmEmail={errors.confirmEmail}
                     handleClick={this.handleClick}
+                    handleBlur={this.handleBlur}
                   />
                   <Password
                     passwordValue={passwordValue}
@@ -333,12 +350,14 @@ class ModalAddUser extends React.Component {
                     errorPassword={errors.password}
                     errorConfirmPassword={errors.confirmPassword}
                     handleClick={this.handleClick}
+                    handleBlur={this.handleBlur}
                   />
                   <Phone
                     phoneValue={phoneValue}
                     handleChangeInput={this.handleChangeInput}
                     errorPhone={errors.phone}
                     handleClick={this.handleClick}
+                    handleBlur={this.handleBlur}
                   />
                   <Address
                     addressValue={addressValue}
@@ -349,6 +368,8 @@ class ModalAddUser extends React.Component {
                     clickAddressAPI={this.clickAddressAPI}
                     showInputApi={showInputApi}
                     errorAddress={errors.address}
+                    handleBlur={this.handleBlur}
+
                   />
                   <Row className="justify-content-md-center">
                     <Col className="text-center" sm={6}>

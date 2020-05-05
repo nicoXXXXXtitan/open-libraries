@@ -11,9 +11,11 @@ const Address = ({
   inputClear,
   clickAddressAPI,
   errorAddress,
+  handleBlur,
 }) => {
   return (
     <>
+      {errorAddress.length > 0 && <span className="login-error">{errorAddress}</span>}
       <Form.Group>
         <Form.Label>Adresse</Form.Label>
         <Form.Control
@@ -26,6 +28,7 @@ const Address = ({
           onChange={handleChangeInput}
           onKeyUp={handleKeyDown}
           onClick={inputClear}
+          onBlur={handleBlur}
         />
 
         {addressesAPI
@@ -42,7 +45,6 @@ const Address = ({
             />
           ))}
       </Form.Group>
-      {errorAddress.length > 0 && <span className="login-error">{errorAddress}</span>}
     </>
   );
 };
@@ -56,6 +58,7 @@ Address.propTypes = {
   inputClear: PropTypes.func.isRequired,
   clickAddressAPI: PropTypes.func.isRequired,
   errorAddress: PropTypes.string.isRequired,
+  handleBlur: PropTypes.func.isRequired,
 };
 
 export default Address;

@@ -9,9 +9,11 @@ const Password = ({
   errorPassword,
   errorConfirmPassword,
   handleClick,
+  handleBlur,
 }) => {
   return (
     <>
+      {errorPassword.length > 0 && <span className="login-error">{errorPassword}</span>}
       <Form.Group>
         <Form.Label>Mot de passe</Form.Label>
         <Form.Control
@@ -22,11 +24,12 @@ const Password = ({
           value={passwordValue}
           onChange={handleChangeInput}
           onClick={handleClick}
-          // autoComplete="on"
+          onBlur={handleBlur}
+          autoComplete="on"
           required
         />
       </Form.Group>
-      {errorPassword.length > 0 && <span className="login-error">{errorPassword}</span>}
+      {errorConfirmPassword.length > 0 && <span className="login-error">{errorConfirmPassword}</span>}
       <Form.Group>
         <Form.Label>Confirmer votre mot de passe</Form.Label>
         <Form.Control
@@ -37,11 +40,11 @@ const Password = ({
           value={confirmPasswordValue}
           onChange={handleChangeInput}
           onClick={handleClick}
-          // autoComplete="on"
+          onBlur={handleBlur}
+          autoComplete="on"
           required
         />
       </Form.Group>
-      {errorConfirmPassword.length > 0 && <span className="login-error">{errorConfirmPassword}</span>}
     </>
   );
 };
@@ -52,5 +55,6 @@ Password.propTypes = {
   errorPassword: PropTypes.string.isRequired,
   errorConfirmPassword: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
 };
 export default Password;

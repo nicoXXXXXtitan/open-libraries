@@ -97,7 +97,7 @@ const reducer = (state = initialState, action = {}) => {
     case DISPLAY_MESSAGE_ERROR_FORM_EMPTY:
       return {
         ...state,
-        messageErrorFormEmpty: 'Echec, vous n\'avez rien rempli !',
+        messageErrorFormEmpty: 'Désolé, vous n\' avez pas rempli tous les champs !',
       };
     case CLEAR_MESS_ERROR_FORM_EMPTY:
       return {
