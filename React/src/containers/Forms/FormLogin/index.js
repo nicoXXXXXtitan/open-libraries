@@ -1,14 +1,12 @@
 import { connect } from 'react-redux';
-
 import ModalLogin from 'src/components/Home/Header/modalLogin';
-
 import { changeInput, submitFormLogin } from 'src/store/actions';
 
 // eslint-disable-next-line arrow-body-style
 const mapStateToProps = (state) => {
   return {
-    inputEmailValue: state.formLogin.email,
-    inputPasswordValue: state.formLogin.password,
+    emailValue: state.formLogin.email,
+    passwordValue: state.formLogin.password,
     loginFailureMessage: state.formLogin.loginFailureMessage,
   };
 };

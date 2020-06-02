@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Container,
+Container,
   Row,
   Col,
   Form,
@@ -10,8 +10,8 @@ import {
 
 // les props recus viennent de redux (dossier : store/reducer/formLogin.js )
 const ModalLogin = ({
-  inputEmailValue,
-  inputPasswordValue,
+  emailValue,
+  passwordValue,
   onValueChange,
   onSubmit,
   loginFailureMessage,
@@ -39,7 +39,7 @@ const ModalLogin = ({
                 name="email"
                 placeholder="Email"
                 // la value est dans le state de Redux
-                value={inputEmailValue}
+                value={emailValue}
                 onChange={handleChangeInput}
               />
             </Form.Group>
@@ -50,7 +50,7 @@ const ModalLogin = ({
                 name="password"
                 placeholder="Password"
                 // la value est dans le state de Redux
-                value={inputPasswordValue}
+                value={passwordValue}
                 onChange={handleChangeInput}
               />
             </Form.Group>
@@ -77,8 +77,8 @@ const ModalLogin = ({
 };
 
 ModalLogin.propTypes = {
-  inputEmailValue: PropTypes.string.isRequired,
-  inputPasswordValue: PropTypes.string.isRequired,
+  emailValue: PropTypes.string.isRequired,
+  passwordValue: PropTypes.string.isRequired,
   onValueChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   loginFailureMessage: PropTypes.string.isRequired,

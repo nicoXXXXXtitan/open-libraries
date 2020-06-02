@@ -13,7 +13,7 @@ const reducer = (state = initialState, action = {}) => {
     case CHANGE_INPUT_VALUE_FORM_LOGIN:
       return {
         ...state,
-        // en fonction du nom du champ je mets à jourr le bon state
+        // en fonction du nom du champ je mets à jour le bon state
         [action.name]: action.value,
         loginFailureMessage: '',
       };
