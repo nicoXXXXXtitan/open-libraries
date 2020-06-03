@@ -18,7 +18,7 @@ const Books = ({ showBigBook, showResultBook, latestBooks }) => {
         {showBigBook === '' && <p className="mainLeftPart-title">Derniers livres ajoutés à la bibliothèque</p>}
         {showResultBook === '' && <p className="mainLeftPart-title">Résultat de votre recherche</p>}
       </Col>
-      {latestBooks && (latestBooks.map((book) => (
+      {latestBooks && (latestBooks.map((book) => ( 
         <Col lg={12} className="d-flex justify-content-center">
           <BigBook
             {...book}
