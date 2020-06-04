@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import 'src/components/HomeUser/PageHome/NavCategory/navCategory.scss';
-
 import { Nav } from 'react-bootstrap';
 
 const NavCategory = ({ listTypes, getCategory }) => {
-
-  const arrayTypes = [];
-  listTypes.map((item) => (arrayTypes.push(item.type)));
 
   const onClick = (evt) => {
     evt.preventDefault();
@@ -16,15 +12,15 @@ const NavCategory = ({ listTypes, getCategory }) => {
 
   return (
     <Nav className="navCategory mt-2 ">
-      {listTypes && arrayTypes.map((type) => (
+      {listTypes && listTypes.map((item) => (
         <Nav.Item>
           <Nav.Link
             className="navItems"
-            key={type}
-            name={type}
+            key={item.type}
+            name={item.type}
             onClick={onClick}
           >
-            {type}
+            {item.type}
           </Nav.Link>
         </Nav.Item>
       ))}
