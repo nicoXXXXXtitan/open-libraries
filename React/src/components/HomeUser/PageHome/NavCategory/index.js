@@ -7,13 +7,12 @@ import { Nav } from 'react-bootstrap';
 const NavCategory = ({ listTypes, getCategory }) => {
 
   const arrayTypes = [];
-  listTypes.map((type) => (arrayTypes.push(type.type)));
+  listTypes.map((item) => (arrayTypes.push(item.type)));
 
   const onClick = (evt) => {
     evt.preventDefault();
     getCategory(evt.target.name);
   };
-
 
   return (
     <Nav className="navCategory mt-2 ">
@@ -21,11 +20,9 @@ const NavCategory = ({ listTypes, getCategory }) => {
         <Nav.Item>
           <Nav.Link
             className="navItems"
-            href="/home"
             key={type}
             name={type}
             onClick={onClick}
-
           >
             {type}
           </Nav.Link>

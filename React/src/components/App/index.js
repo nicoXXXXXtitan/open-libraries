@@ -39,7 +39,7 @@ class App extends React.Component {
 
         {!isLogged && <Redirect to="/" />}
         {/* tant que loading est true je suis redirigé vers le loader pour l'afficher */}
-        {loading && <Redirect to="loading" />}
+        {loading && <Redirect to="/loading" />}
         {isLogged && typeUser === 'ROLE_USER' && <Redirect to="/home" /> }
         {isLogged && typeUser === 'ROLE_ADMIN' && <Redirect to="/board" />}
 
