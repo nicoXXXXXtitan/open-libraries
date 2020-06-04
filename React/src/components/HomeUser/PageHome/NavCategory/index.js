@@ -6,7 +6,6 @@ import { Nav } from 'react-bootstrap';
 const NavCategory = ({ listTypes, getCategory }) => {
 
   const onClick = (evt) => {
-    evt.preventDefault();
     getCategory(evt.target.name);
   };
 
