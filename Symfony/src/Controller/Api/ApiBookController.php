@@ -148,7 +148,7 @@ class ApiBookController extends AbstractController
                     }
                     return $this->json($data, 200, [], ['groups' => '1']);
                 } else {
-                    $message = "Le livre n'a pas été trouvé, merci de remplir le formulaire pour ajouter votre livre";
+                    $message = "Le livre n'a pas été trouvée, merci de remplir le formulaire pour ajouter votre livre";
                     return $this->json($message, 200, []);
                 }
         }
