@@ -113,10 +113,6 @@ const loginMiddleware = (store) => (next) => (action) => {
                   // several types of errors possible with Axios (https://github.com/axios/axios#handling-errors)
                   .catch((error) => {
                     localStorage.removeItem('token');
-                    // console.log('error response :', error.response);
-                    // console.log('error request :', error.request);
-                    // console.log('error message :', error.message);
-                    // console.log('error config :', error.config);
                   });
               }
 
@@ -153,7 +149,7 @@ const loginMiddleware = (store) => (next) => (action) => {
 
       break;
     default:
-      // by default I'll let the action happen //
+      // by default I'll let the action happen
       next(action);
   }
 };
