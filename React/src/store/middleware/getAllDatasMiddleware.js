@@ -25,7 +25,7 @@ const getAllDatasMiddleware = (store) => (next) => (action) => {
     case GET_ALL_DATAS:
       store.dispatch(displayLoader());
       // I request the object User to display it on the HomeUser or the Board page.
-      return axios.get('http://localhost:8001/api/user/profile', {
+      axios.get('http://localhost:8001/api/user/profile', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
