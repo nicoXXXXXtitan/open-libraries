@@ -6,18 +6,12 @@ import {
   VALIDATE_BOOKING,
   messageAfterBooking,
   displayMessageErrorSearchBook,
- } from 'src/store/actions';
-
+} from 'src/store/actions';
 
 
 const SearchBookMiddleware = (store) => (next) => (action) => {
   const search = store.getState().searchBook.inputSearchValue;
   const token = window.localStorage.getItem('token');
-
-  const { ownerId } = store.getState().searchBook;
-  const { bookId } = store.getState().searchBook;
-
- 
 
   switch (action.type) {
     case SUBMIT_FORM_SEARCH:
@@ -32,19 +26,18 @@ const SearchBookMiddleware = (store) => (next) => (action) => {
           store.dispatch(getBookBySearch(responseBook));
         })
         .catch((error) => {
-          // console.log(error);
           if (error) {
             store.dispatch(displayMessageErrorSearchBook());
           }
         });
 
       break;
-    case VALIDATE_BOOKING:
-      // Si je mets plus haut ces 2 lignes ca plante l'appli 
-      const library = store.getState().book.bookSearch.datasUsers[0];
-      const isLibrary = library.name;
+    case VALIDATE_BOOKING: {
+      const ownerId = store.getState().book.bookSearch.datasUsers[0].id;
+      const libraryName = store.getState().book.bookSearch.datasUsers[0].name;
+      const bookId = store.getState().book.bookSearch.bookInfos.id;
 
-      if (isLibrary) {
+      if (libraryName) {
         axios
           .get(`http://localhost:8001/api/user/booking/add/library/${bookId}/${ownerId}`, {
             headers: {
@@ -56,7 +49,6 @@ const SearchBookMiddleware = (store) => (next) => (action) => {
             store.dispatch(messageAfterBooking(messageConfirmBooking));
           })
           .catch((error) => {
-            // console.log(error);
           });
       } else {
         axios
@@ -70,10 +62,10 @@ const SearchBookMiddleware = (store) => (next) => (action) => {
             store.dispatch(messageAfterBooking(messageConfirmBooking));
           })
           .catch((error) => {
-            // console.log(error);
           });
       }
       break;
+    }
     default:
       // par defaut je laise passer l'action
       next(action);

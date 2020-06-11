@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import ResultOwnersAfterSearchByTitle from 'src/components/HomeUser/PageHome/ResultOwnersAfterSearchByTitle';
-import { setBooking, openValidateModal } from 'src/store/actions';
+import { openValidateModal } from 'src/store/actions';
 
 // eslint-disable-next-line arrow-body-style
 const mapStateToProps = (state) => {
@@ -12,8 +12,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  openModalValidate: (idOwner, bookId) => {
-    dispatch(setBooking(idOwner, bookId));
+  openModalValidate: () => {
     dispatch(openValidateModal());
   },
 });

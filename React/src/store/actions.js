@@ -48,7 +48,6 @@ export const CLOSE_MODAL_ADD_NEW_USER = 'CLOSE_MODAL_ADD_NEW_USER';
 export const CLOSE_MODAL_SUCCESS_ADD_USER = 'CLOSE_MODAL_SUCCESS_ADD_USER';
 export const GET_LATEST_BOOK = 'GET_LATEST_BOOK';
 export const UPDATE_BOOKING_STATE = 'UPDATE_BOOKING_STATE';
-export const SET_BOOKING = 'SET_BOOKING';
 export const VALIDATE_BOOKING = 'VALIDATE_BOOKING';
 export const UPDATE_BOOK_IN_BOOKING = 'UPDATE_BOOK_IN_BOOKING';
 export const OPEN_MODAL_VALIDATE = 'OPEN_MODAL_VALIDATE';
@@ -229,12 +228,6 @@ export const displayMessageErrorSearchBook = () => ({
 export const getBookBySearch = (bookSearch) => ({
   type: GET_BOOK_BY_SEARCH,
   bookSearch,
-});
-
-export const setBooking = (ownerId, bookId) => ({
-  type: SET_BOOKING,
-  ownerId,
-  bookId,
 });
 
 export const closeModalErrorSearchBook = () => ({
