@@ -9,15 +9,8 @@ import './ResultOwnersAfterSearchByTitle.scss';
 
 const ResultOwnersAfterSearchByTitle = ({ showResultOwnersAfterSearchByTitle, bookResultSearch, openModalValidate }) => {
 
-  let bookId = 0;
-
-  if (bookResultSearch) {
-    bookId = bookResultSearch.bookInfos.id;
-  }
-
-  const onClick = (evt) => {
-    const idOwner = evt.target.value;
-    openModalValidate(idOwner, bookId);
+  const onClick = () => {
+    openModalValidate();
   };
 
   return (
@@ -39,7 +32,6 @@ const ResultOwnersAfterSearchByTitle = ({ showResultOwnersAfterSearchByTitle, bo
             <Col lg={12} className="text-center mt-1">
               <ul className="cardResultOwnerBooks-ul">
                 <li
-                  value={bookResultSearch.datasUsers[0].id}
                   className="mb-3 cardResultOwnerBooks-li"
                   onClick={onClick}
                 >{bookResultSearch.datasUsers[0].firstname}

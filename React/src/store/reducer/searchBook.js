@@ -1,6 +1,5 @@
 import {
   CHANGE_VALUE_SEARCH,
-  SET_BOOKING,
   OPEN_MODAL_VALIDATE,
   CLOSE_MODAL_VALIDATE_BOOKING,
   MESSAGE_AFTER_BOOKING,
@@ -9,10 +8,7 @@ import {
 } from 'src/store/actions';
 
 const initialState = {
-  //  a remodifier
   inputSearchValue: '',
-  ownerId: 0,
-  bookId: 0,
   showModalReserveBook: false,
   messageAfterBooking: '',
   displayMessageErrorSearchBook: '',
@@ -31,12 +27,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         showModalErrorSearchBook: true,
         displayMessageErrorSearchBook: 'Désolé nous n\'avons pas trouvé votre livre, faites une nouvelle recherche.',
-      };
-    case SET_BOOKING:
-      return {
-        ...state,
-        ownerId: action.ownerId,
-        bookId: action.bookId,
       };
     case OPEN_MODAL_VALIDATE:
       return {
