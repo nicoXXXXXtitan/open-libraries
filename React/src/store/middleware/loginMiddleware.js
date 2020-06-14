@@ -46,9 +46,7 @@ const loginMiddleware = (store) => (next) => (action) => {
               // The role allows me to manage redirections.
               store.dispatch(setProfilUser(dataUser, roleUser));
 
-              const { typeUser } = store.getState().user;
-
-              if (typeUser === 'ROLE_USER') {
+              if (roleUser === 'ROLE_USER') {
                 // The last 2 books made available for borrowing
                 return axios.get('http://localhost:8001/api/book/latest', {
                   headers: {

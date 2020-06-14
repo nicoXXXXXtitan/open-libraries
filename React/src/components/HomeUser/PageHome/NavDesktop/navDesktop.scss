@@ -1,5 +1,4 @@
 .logo {
-  // margin-left: 30px;
   padding-top: 10px;
 
   &-icon {
@@ -13,8 +12,7 @@
     padding-right: 0;
   }
   
-  &-part1 {
-    
+  &-part1 {  
     font-size: 3em;
     font-weight: 500;
     color: white;
@@ -26,7 +24,6 @@
     color: white;
   
   }
-
 }
 
 
@@ -54,23 +51,7 @@
 }
 
 .sideBarUser {
-  background: #ea4c4c;  /* fallback for old browsers */
-  // background: -webkit-linear-gradient(to bottom, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
-  // background: linear-gradient(to bottom,  #FC5C7D, #6A82FB,); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #ea4c4c;  
   color: white;
   font-family: 'Roboto', sans-serif;
 }
-
-// @keyframes defilement-rtl {
-//   0% {
-//     transform: translate3d(0,0,0);      /* position initiale à droite */
-//   }
-//   100% {
-//     transform: translate3d(-100%,0,0);  /* position finale à gauche */
-//   }
-// }
-
-
-// .linkRentBook{
-//   animation: defilement-rtl 2s infinite linear;
-// }

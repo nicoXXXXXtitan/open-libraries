@@ -100,7 +100,7 @@ export const setProfilUser = (dataUser, roleUser) => ({
 export const setTypes = (types) => ({
   type: SET_TYPES,
   types,
-})
+});
 
 export const listBookByOneCategoryInitApp = (listInitOneCategory) => ({
   type: INIT_APP_LIST_BOOKS_BY_ONE_CATEGORY,

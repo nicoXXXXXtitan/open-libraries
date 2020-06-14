@@ -14,7 +14,7 @@ const NavMobile = () => {
         <Col xs={6} sm={6} className="d-flex justify-content-end">
           <Dropdown>
             <Dropdown.Toggle variant="light">
-             Menu
+              Menu
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item href="">Je veux prêter mon livre</Dropdown.Item>
