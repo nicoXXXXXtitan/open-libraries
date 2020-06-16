@@ -32,6 +32,8 @@ const SearchBookMiddleware = (store) => (next) => (action) => {
         });
 
       break;
+
+    // Caution : The braces (after the :) allow not to have a variable range in the whole block.
     case VALIDATE_BOOKING: {
       const ownerId = store.getState().book.bookSearch.datasUsers[0].id;
       const libraryName = store.getState().book.bookSearch.datasUsers[0].name;

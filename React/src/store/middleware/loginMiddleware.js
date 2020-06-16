@@ -26,7 +26,6 @@ const loginMiddleware = (store) => (next) => (action) => {
 
   switch (action.type) {
     case SUBMIT_FORM_LOGIN:
- 
       // I request a token from the server using the lexik JWT bundle,
       axios.post('http://localhost:8001/api/login_check', datasFormLogin)
         .then((response1) => {
@@ -90,9 +89,6 @@ const loginMiddleware = (store) => (next) => (action) => {
                                 const getBookLend = bookLend.data;
                                 // I store in the state
                                 store.dispatch(getBookILend(getBookLend));
-                                // I change the state "isLogged" to true to allow access to certain routes.
-                                store.dispatch(isLogged());
-                                store.dispatch(stopLoader());
 
                                 // List of book categories present in bdd
                                 return axios.get('http://localhost:8001/api/book/list/type', {
@@ -103,6 +99,9 @@ const loginMiddleware = (store) => (next) => (action) => {
                                   .then((response) => {
                                     const types = response.data;
                                     store.dispatch(setTypes(types));
+                                    // I change the state "isLogged" to true to allow access to certain routes.
+                                    store.dispatch(isLogged());
+                                    store.dispatch(stopLoader());
                                   });
                               });
                           });

@@ -49,7 +49,7 @@ const getAllDatasMiddleware = (store) => (next) => (action) => {
               .then((bookBorrowed) => {
                 const getBookBorrowed = bookBorrowed.data;
                 store.dispatch(getBorrowedBooks(getBookBorrowed));
-                store.dispatch(isLogged());
+                // store.dispatch(isLogged());
 
                 // list of user's books available for borrowing
                 return axios.get('http://localhost:8001/api/booking/list', {
@@ -91,6 +91,7 @@ const getAllDatasMiddleware = (store) => (next) => (action) => {
                               .then((response3) => {
                                 const listBooksCategoryInitApp = response3.data;
                                 store.dispatch(listBookByOneCategoryInitApp(listBooksCategoryInitApp));
+                                store.dispatch(isLogged());
                                 store.dispatch(stopLoader());
                               });
                           });
@@ -112,8 +113,7 @@ const getAllDatasMiddleware = (store) => (next) => (action) => {
             .then((responseUserBoard) => {
               const usersBoard = responseUserBoard.data;
               store.dispatch(setUsers(usersBoard));
-              store.dispatch(isLogged());
-              store.dispatch(stopLoader());
+
               // list of all books
               return axios.get('http://localhost:8001/api/book/all', {
                 headers: {
@@ -123,6 +123,8 @@ const getAllDatasMiddleware = (store) => (next) => (action) => {
                 .then((responseAllBooks) => {
                   const { data } = responseAllBooks;
                   store.dispatch(setAllBooks(data));
+                  store.dispatch(isLogged());
+                  store.dispatch(stopLoader());
                 });
             });
         })
