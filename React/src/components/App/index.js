@@ -23,6 +23,7 @@ class App extends React.Component {
   componentDidMount() {
 
     const { loggedUser } = this.props;
+    console.log("cdm");
 
     const tokenLocalStorage = window.localStorage.getItem('token');
     // axios.defaults.headers.Authorization = `Bearer ${tokenLocalStorage}`;
