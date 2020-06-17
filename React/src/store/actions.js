@@ -242,6 +242,10 @@ export const bookingValidate = () => ({
   type: VALIDATE_BOOKING,
 });
 
+export const getAllDatasAfterReservationBook = () => ({
+  type: GET_ALL_DATAS,
+});
+
 export const hideModalBookingValidate = () => ({
   type: CLOSE_MODAL_VALIDATE_BOOKING,
 });

@@ -49,7 +49,6 @@ const getAllDatasMiddleware = (store) => (next) => (action) => {
               .then((bookBorrowed) => {
                 const getBookBorrowed = bookBorrowed.data;
                 store.dispatch(getBorrowedBooks(getBookBorrowed));
-                // store.dispatch(isLogged());
 
                 // list of user's books available for borrowing
                 return axios.get('http://localhost:8001/api/booking/list', {

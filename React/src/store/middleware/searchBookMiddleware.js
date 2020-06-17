@@ -6,6 +6,7 @@ import {
   VALIDATE_BOOKING,
   messageAfterBooking,
   displayMessageErrorSearchBook,
+  getBorrowedBooks,
 } from 'src/store/actions';
 
 
@@ -49,6 +50,16 @@ const SearchBookMiddleware = (store) => (next) => (action) => {
           .then((response1) => {
             const messageConfirmBooking = response1.data;
             store.dispatch(messageAfterBooking(messageConfirmBooking));
+
+            return axios.get('http://localhost:8001/api/user/booking/borrowed', {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+              .then((bookBorrowed) => {
+                const getBookBorrowed = bookBorrowed.data;
+                store.dispatch(getBorrowedBooks(getBookBorrowed));
+              });
           })
           .catch((error) => {
           });
@@ -62,6 +73,16 @@ const SearchBookMiddleware = (store) => (next) => (action) => {
           .then((response2) => {
             const messageConfirmBooking = response2.data;
             store.dispatch(messageAfterBooking(messageConfirmBooking));
+
+            return axios.get('http://localhost:8001/api/user/booking/borrowed', {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+              .then((bookBorrowed) => {
+                const getBookBorrowed = bookBorrowed.data;
+                store.dispatch(getBorrowedBooks(getBookBorrowed));
+              });
           })
           .catch((error) => {
           });
