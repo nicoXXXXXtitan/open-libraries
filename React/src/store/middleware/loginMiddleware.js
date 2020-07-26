@@ -31,6 +31,8 @@ const loginMiddleware = (store) => (next) => (action) => {
         .then((response1) => {
           const { token } = response1.data;
           window.localStorage.setItem('token', token);
+          // document.cookie = 'user=' + token ;
+          // document.cookie = "username=John1 Doe; HttpOnly";
           store.dispatch(displayLoader());
           // I request the object User to display it on the HomeUser or the Board page.
           return axios.get('http://localhost:8001/api/user/profile', {

@@ -44,7 +44,7 @@ class ApiBookingController extends AbstractController
             );
         }
 
-        $test = $ownbooking->joinBookingandBook($userbookings[0]);
+        // $test = $ownbooking->joinBookingandBook($userbookings[0]);
         //dd($test);
         
         $datas =[];
