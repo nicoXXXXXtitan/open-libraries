@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import 'src/components/HomeUser/PageHome/NavCategory/navCategory.scss';
+import './navCategory.scss';
 import { Nav } from 'react-bootstrap';
 
 const NavCategory = ({ listTypes, getCategory }) => {

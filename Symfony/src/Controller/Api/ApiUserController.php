@@ -141,7 +141,7 @@ class ApiUserController extends AbstractController
             $em->persist($newBooking);
             $em->flush();
 
-            $message = "Le livre " .$book->getTitle() ."a bien été ajouté à vos emprunts";
+            $message = "Le livre " .$book->getTitle() ." a bien été ajouté à vos emprunts";
             return $this->json($message);
         }
     }
@@ -176,7 +176,7 @@ class ApiUserController extends AbstractController
             $em->persist($newBooking);
             $em->flush();
 
-            $message = "Le livre " .$book->getTitle() ."a bien été ajouté à vos emprunts";
+            $message = "Le livre " .$book->getTitle() ." a bien été ajouté à vos emprunts";
             return $this->json($message);
         }
     }
