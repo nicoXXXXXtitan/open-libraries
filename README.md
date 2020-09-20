@@ -8,7 +8,7 @@ Page d'un utilsateur connecté
 ![Page utilisateur connecté](./home-user.png "acceuil")
 
 
-:arrow_right:   Application de gestion d'emprûnts de livres (https://open-libraries.fr).
+:arrow_right:   Application de gestion d'emprûnt de livres (https://open-libraries.fr).
 
 :arrow_right:   Projet Symfony 5.0 & React 16.12
 
