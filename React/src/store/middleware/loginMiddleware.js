@@ -29,6 +29,7 @@ const loginMiddleware = (store) => (next) => (action) => {
       // I request a token from the server using the lexik JWT bundle,
       axios.post('http://localhost:8001/api/login_check', datasFormLogin)
         .then((response1) => {
+          console.log(response1);
           const { token } = response1.data;
           window.localStorage.setItem('token', token);
           // document.cookie = 'user=' + token ;
@@ -41,6 +42,7 @@ const loginMiddleware = (store) => (next) => (action) => {
             },
           })
             .then((response2) => {
+              console.log(response2);
               const dataUser = response2.data;
               const roleUser = dataUser.roles[0];
               // I store in the state the object User and the role.
