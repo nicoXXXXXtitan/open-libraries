@@ -1,4 +1,4 @@
-# :orange_book: Open-libraries :orange_book:
+# :closed_book: Open-libraries :closed_book:
 
 
 Page d'acceuil
