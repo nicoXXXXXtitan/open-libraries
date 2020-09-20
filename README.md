@@ -1,10 +1,10 @@
 # :closed_book: Open-libraries :closed_book:
 
 
-Page d'acceuil
+#### Page d'acceuil
 ![Page d'acceuil](./home.png "acceuil")
 
-Page d'un utilsateur connecté
+#### Page d'un utilsateur connecté
 ![Page utilisateur connecté](./home-user.png "acceuil")
 
 
@@ -15,7 +15,7 @@ Page d'un utilsateur connecté
 Technos utilisées :
 
 * Front-end : HTML/CSS, Sass, React JS, React-boostrap, React-router, Axios, Leaflet (pour la carte).
-* Back-end : Symfony PHP, mySQL
+* Back-end : Symfony PHP, mySQL#
 * Sécurisation des échanges entre le front et le back : LexikJWTAuthentificationBundle.
 * Utilisation de 2 API : 
   * Google Books pour obtenir les infos d'un livre.
