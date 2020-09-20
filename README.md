@@ -4,7 +4,7 @@
 #### Page d'acceuil
 ![Page d'acceuil](./home.png "acceuil")
 
-#### Page d'un utilsateur connecté
+#### Page d'un utilisateur connecté
 ![Page utilisateur connecté](./home-user.png "acceuil")
 
 
