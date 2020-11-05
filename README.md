@@ -15,7 +15,7 @@
 Technos utilisées :
 
 * Front-end : HTML/CSS | Sass | React JS | React-boostrap | React-router | Axios | Leaflet (pour la carte).
-* Back-end : PHP | Symfony 5.1 | mySQL
+* Back-end : PHP | Symfony 5.0 | mySQL
 * Sécurisation des échanges entre le front et le back : LexikJWTAuthentificationBundle.
 * Utilisation de 2 API : 
   * Google Books pour obtenir les infos d'un livre.
